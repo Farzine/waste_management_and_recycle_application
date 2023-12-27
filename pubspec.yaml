@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  flutter_signin_button: 2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -16,4 +18,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  
+  assets:
+    - assets/background_Image.png
+
   uses-material-design: true
