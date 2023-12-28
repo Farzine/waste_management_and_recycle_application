@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395828958201",
+    "project_id": "garbage-f771e",
+    "storage_bucket": "garbage-f771e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395828958201:android:fb5c9f5224ffec89406328",
+        "android_client_info": {
+          "package_name": "com.example.waste_management_and_recycle_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtNbApmLPGl-Ja6F8I7IdBhZZ8ZGQBLrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
