@@ -25,5 +25,7 @@ flutter:
   
   assets:
     - assets/background_Image.png
+    - assets/Dustbin_set.png
+    - assets/garbage_truck.png
 
   uses-material-design: true
