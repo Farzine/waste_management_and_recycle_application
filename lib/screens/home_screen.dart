@@ -1,122 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
+import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
+import 'package:waste_management_and_recycle_application/screens/home/waste_type.dart';
 
 class HomeScreen extends StatelessWidget {
-  Widget WasteType() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      height: 200,
-      width: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Color.fromARGB(255, 165, 248, 165),
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Image(
-              image: AssetImage('assets/garbage_truck.png'),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  height: 45,
-                  width: 145,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 86, 161, 71),
-                    ),
-                    onPressed: () {},
-                    child: Column(
-                      children: [
-                        Text(
-                          'Garbage Service',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'subscription',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 44, 44, 44)),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-    ;
-  }
-
-  Widget singalProducts() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      height: 200,
-      width: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Color.fromARGB(255, 165, 248, 165),
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Image(
-              image: AssetImage('assets/garbage_truck.png'),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  height: 45,
-                  width: 145,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 86, 161, 71),
-                    ),
-                    onPressed: () {},
-                    child: Column(
-                      children: [
-                        Text(
-                          'Garbage Service',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'subscription',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 44, 44, 44)),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 184, 180, 180),
-      drawer: Drawer(
-        child: Container(
-          color: Color.fromARGB(255, 86, 161, 71),
-          width: double.infinity,
-          height: double.infinity,
-        ),
-      ),
+      drawer: DrawerSide(),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
@@ -183,19 +76,29 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Text(
-                            'Subscription',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.black,
-                              shadows: [
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  color: Colors.green,
-                                  offset: Offset(3, 3),
+                          Container(
+                            height: 20,
+                            width: 112,
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromARGB(255, 86, 161, 71),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                              ],
+                              ),
+                              onPressed: () {},
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Subscription',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -221,19 +124,28 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Text(
-                            'Special Pick Up',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.black,
-                              shadows: [
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  color: Colors.green,
-                                  offset: Offset(3, 3),
-                                ),
-                              ],
+                          Container(
+                            height: 20,
+                            width: 125,
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  backgroundColor:
+                                      Color.fromARGB(255, 86, 161, 71),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  )),
+                              onPressed: () {},
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Special Pickup',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -269,10 +181,36 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  singalProducts(),
-                  singalProducts(),
-                  singalProducts(),
-                  singalProducts(),
+                  SingalProduct(
+                    productImage: 'assets/garbage_truck.png',
+                    productName: 'Garbage Service',
+                    productSubTitle: 'subscription',
+                    onTap: () {},
+                  ),
+                  SingalProduct(
+                    productImage: 'assets/recycle.png',
+                    productName: 'Recycle Service',
+                    productSubTitle: 'Free',
+                    onTap: () {},
+                  ),
+                  SingalProduct(
+                    productImage: 'assets/transportation.png',
+                    productName: 'Transportation',
+                    productSubTitle: 'service',
+                    onTap: () {},
+                  ),
+                  SingalProduct(
+                    productImage: 'assets/hazardous.png',
+                    productName: 'Hazardous waste',
+                    productSubTitle: 'management',
+                    onTap: () {},
+                  ),
+                  SingalProduct(
+                    productImage: 'assets/cleaner.png',
+                    productName: 'Cleaner Service',
+                    productSubTitle: 'subscription',
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
@@ -302,10 +240,36 @@ class HomeScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  WasteType(),
-                  WasteType(),
-                  WasteType(),
-                  WasteType(),
+                  WasteType(
+                    WasteTypeImage: 'assets/solid_waste.png',
+                    WasteTypeName: 'Solid Waste',
+                    WasteTypeSubTitle: 'municipal waste',
+                    onTap: () {},
+                  ),
+                  WasteType(
+                    WasteTypeImage: 'assets/organic_waste.png',
+                    WasteTypeName: 'Organic waste',
+                    WasteTypeSubTitle: 'residential waste',
+                    onTap: () {},
+                  ),
+                  WasteType(
+                    WasteTypeImage: 'assets/medical_waste.png',
+                    WasteTypeName: 'Medical waste',
+                    WasteTypeSubTitle: 'municipal waste',
+                    onTap: () {},
+                  ),
+                  WasteType(
+                    WasteTypeImage: 'assets/eWaste.png',
+                    WasteTypeName: 'Electronic Waste',
+                    WasteTypeSubTitle: 'residential waste',
+                    onTap: () {},
+                  ),
+                  WasteType(
+                    WasteTypeImage: 'assets/plastic_waste.png',
+                    WasteTypeName: 'Plastic waste',
+                    WasteTypeSubTitle: 'municiple waste',
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
