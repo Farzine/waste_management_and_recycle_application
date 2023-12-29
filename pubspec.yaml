@@ -27,5 +27,14 @@ flutter:
     - assets/background_Image.png
     - assets/Dustbin_set.png
     - assets/garbage_truck.png
+    - assets/recycle.png
+    - assets/transportation.png
+    - assets/hazardous.png
+    - assets/cleaner.png
+    - assets/solid_waste.png
+    - assets/organic_waste.png
+    - assets/medical_waste.png
+    - assets/eWaste.png
+    - assets/plastic_waste.png
 
   uses-material-design: true
