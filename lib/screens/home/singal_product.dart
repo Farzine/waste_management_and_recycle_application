@@ -25,6 +25,7 @@ class SingalProduct extends StatelessWidget {
               color: Color.fromARGB(255, 165, 248, 165),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 3,
@@ -43,7 +44,9 @@ class SingalProduct extends StatelessWidget {
                           style: OutlinedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 86, 161, 71),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            onTap();
+                          },
                           child: Column(
                             children: [
                               Text(

@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
 import 'package:waste_management_and_recycle_application/screens/home/waste_type.dart';
+import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -185,7 +186,13 @@ class HomeScreen extends StatelessWidget {
                     productImage: 'assets/garbage_truck.png',
                     productName: 'Garbage Service',
                     productSubTitle: 'subscription',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ServiceOverview(),
+                        ),
+                      );
+                    },
                   ),
                   SingalProduct(
                     productImage: 'assets/recycle.png',

@@ -32,6 +32,10 @@ class DrawerSide extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 40,
                       backgroundColor: Color.fromARGB(255, 86, 161, 71),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(0),
+                        child: Image.asset('assets/Garbage.png'),
+                      ),
                     ),
                   ),
                   SizedBox(
