@@ -43,7 +43,9 @@ class WasteType extends StatelessWidget {
                           style: OutlinedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 86, 161, 71),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            onTap();
+                          },
                           child: Column(
                             children: [
                               Text(

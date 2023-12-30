@@ -32,6 +32,10 @@ class DrawerSide extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 40,
                       backgroundColor: Color.fromARGB(255, 86, 161, 71),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(0),
+                        child: Image.asset('assets/Garbage.png'),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -71,7 +75,7 @@ class DrawerSide extends StatelessWidget {
                 ],
               ),
             ),
-            listTile(icon: Icons.home_outlined, title: 'Home'),
+            listTile(icon: Icons.home, title: 'Home'),
             listTile(icon: Icons.account_box, title: 'My Profile'),
             listTile(icon: Icons.notifications, title: 'Notification'),
             listTile(icon: Icons.cleaning_services, title: 'Ouer Service'),
