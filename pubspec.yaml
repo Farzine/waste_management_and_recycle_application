@@ -37,5 +37,6 @@ flutter:
     - assets/eWaste.png
     - assets/plastic_waste.png
     - assets/Garbage.png
+    - assets/profile_pic.png
 
   uses-material-design: true
