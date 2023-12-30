@@ -3,6 +3,19 @@ import 'package:flutter/material.dart';
 enum SigninCharacter { fill, outline }
 
 class ServiceOverview extends StatefulWidget {
+  final String serviceName;
+  final String serviceSubName;
+  final String serviceImage;
+  final String aboutService;
+  final String avaiableOption;
+  ServiceOverview({
+    required this.serviceName,
+    required this.serviceImage,
+    required this.aboutService,
+    required this.serviceSubName,
+    required this.avaiableOption,
+  });
+
   @override
   State<ServiceOverview> createState() => _ServiceOverviewState();
 }
@@ -83,18 +96,18 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                 children: [
                   ListTile(
                     title: Text(
-                      'Garbage Service',
+                      widget.serviceName ?? "null",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      'subscription',
+                      widget.serviceSubName ?? "null",
                       style: TextStyle(color: Colors.black),
                     ),
                   ),
                   Container(
                     height: 250,
                     padding: EdgeInsets.all(40),
-                    child: Image.asset('assets/garbage_truck.png'),
+                    child: Image.asset(widget.serviceImage ?? "null"),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -129,7 +142,7 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                             )
                           ],
                         ),
-                        Text('Residential'),
+                        Text(widget.avaiableOption ?? "null"),
                         Container(
                           padding:
                               EdgeInsets.symmetric(horizontal: 30, vertical: 8),
@@ -174,8 +187,7 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                      'Looking for reliable garbage collection services? Look no further! Our professional team offers affordable and efficient garbage pickup and disposal for residential and commercial properties. We provide flexible scheduling, convenient curbside pickup, and eco-friendly waste management solutions. Say goodbye to your garbage worries with our top-notch. 10\$ per hour service'),
+                  Text(widget.aboutService ?? "null"),
                 ],
               ),
             ),

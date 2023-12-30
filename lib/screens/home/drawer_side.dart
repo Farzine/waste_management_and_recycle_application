@@ -75,7 +75,7 @@ class DrawerSide extends StatelessWidget {
                 ],
               ),
             ),
-            listTile(icon: Icons.home_outlined, title: 'Home'),
+            listTile(icon: Icons.home, title: 'Home'),
             listTile(icon: Icons.account_box, title: 'My Profile'),
             listTile(icon: Icons.notifications, title: 'Notification'),
             listTile(icon: Icons.cleaning_services, title: 'Ouer Service'),
