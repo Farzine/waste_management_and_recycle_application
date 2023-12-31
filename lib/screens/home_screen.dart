@@ -3,6 +3,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
 import 'package:waste_management_and_recycle_application/screens/home/waste_type.dart';
+import 'package:waste_management_and_recycle_application/screens/search/search.dart';
 import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 import 'package:waste_management_and_recycle_application/screens/wasteType_overview/wasteType_OverView.dart';
 
@@ -20,23 +21,41 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           CircleAvatar(
-            radius: 13,
-            backgroundColor: Color.fromARGB(255, 165, 248, 165),
-            child: Icon(
-              Icons.search,
-              size: 17,
-              color: Colors.black,
+            radius: 15,
+            backgroundColor: Color.fromARGB(255, 86, 161, 71),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Search(),
+                  ),
+                );
+              },
+              icon: Icon(
+                size: 25,
+                color: Colors.black,
+                Icons.search,
+              ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 7),
             child: CircleAvatar(
-              radius: 13,
-              backgroundColor: Color.fromARGB(255, 165, 248, 165),
-              child: Icon(
-                Icons.notifications,
-                size: 17,
-                color: Colors.black,
+              radius: 15,
+              backgroundColor: Color.fromARGB(255, 86, 161, 71),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Search(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  size: 25,
+                  color: Colors.black,
+                  Icons.notifications,
+                ),
               ),
             ),
           ),
