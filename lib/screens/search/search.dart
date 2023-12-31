@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:waste_management_and_recycle_application/screens/search/search_item.dart';
+import 'package:waste_management_and_recycle_application/widgets/singleItem.dart';
 
 class Search extends StatelessWidget {
   @override
@@ -46,25 +46,29 @@ class Search extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          SearchItem(
+          SingleItem(
             searchItemName: 'Recycle Service',
             searchItemImage: 'assets/recycle.png',
             searchItemSubName: 'Free',
+            isbool: false,
           ),
-          SearchItem(
+          SingleItem(
             searchItemName: 'Transportation',
             searchItemImage: 'assets/transportation.png',
             searchItemSubName: 'Residential',
+            isbool: false,
           ),
-          SearchItem(
+          SingleItem(
             searchItemName: 'Medical waste',
             searchItemImage: 'assets/medical_waste.png',
             searchItemSubName: 'Municiplle',
+            isbool: false,
           ),
-          SearchItem(
+          SingleItem(
             searchItemName: 'Plastic Waste',
             searchItemImage: 'assets/plastic_waste.png',
             searchItemSubName: 'Residential',
+            isbool: false,
           ),
         ],
       ),

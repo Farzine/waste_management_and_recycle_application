@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 import 'package:waste_management_and_recycle_application/screens/my_profile/my_profile.dart';
+import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
 import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 
 class DrawerSide extends StatelessWidget {
@@ -107,12 +108,7 @@ class DrawerSide extends StatelessWidget {
             listTile(
               icon: Icons.notifications,
               title: 'Notification',
-              onTap: () {
-                // Future(() {
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => HomeScreen()));
-                // });
-              },
+              onTap: () {},
             ),
             listTile(
               icon: Icons.cleaning_services,
@@ -132,19 +128,26 @@ class DrawerSide extends StatelessWidget {
               },
             ),
             listTile(
-              icon: Icons.location_on_outlined,
+              icon: Icons.location_on,
               title: 'Pickup Points',
               onTap: () {},
             ),
             listTile(
-              icon: Icons.subscriptions_outlined,
+              icon: Icons.subscriptions,
               title: 'Subscription',
               onTap: () {},
             ),
             listTile(
-                icon: Icons.rate_review_outlined,
-                title: 'Rating & Review',
-                onTap: () {}),
+              icon: Icons.shop_2,
+              title: 'Service Cart',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ReviewService(),
+                  ),
+                );
+              },
+            ),
             listTile(icon: Icons.message_rounded, title: 'FAQs', onTap: () {}),
             Container(
               height: 350,
