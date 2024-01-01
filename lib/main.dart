@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/auth/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
 void main() async {
@@ -22,8 +24,11 @@ void main() async {
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreen(),
+    return ChangeNotifierProvider<ServiceProvider>(
+      create: (context) => ServiceProvider(),
+      child: MaterialApp(
+        home: SignIn(),
+      ),
     );
   }
 }

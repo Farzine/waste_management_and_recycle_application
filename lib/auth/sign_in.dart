@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -87,7 +88,7 @@ class _SignInState extends State<SignIn> {
                           _googleSignUp().then(
                             (value) => Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => SignIn(),
+                                builder: (context) => HomeScreen(),
                               ),
                             ),
                           );

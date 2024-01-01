@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
 import 'package:waste_management_and_recycle_application/screens/home/waste_type.dart';
@@ -7,9 +9,23 @@ import 'package:waste_management_and_recycle_application/screens/search/search.d
 import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 import 'package:waste_management_and_recycle_application/screens/wasteType_overview/wasteType_OverView.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late ServiceProvider serviceProvider;
+  @override
+  void initState() {
+    ServiceProvider serviceProvider = Provider.of(context, listen: false);
+    serviceProvider.fatchServiceData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    serviceProvider = Provider.of(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 184, 180, 180),
       drawer: DrawerSide(),
@@ -201,98 +217,31 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  SingalProduct(
-                    productImage: 'assets/garbage_truck.png',
-                    productName: 'Garbage Service',
-                    productSubTitle: 'subscription',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ServiceOverview(
-                              serviceName: 'Garbage Service',
-                              serviceImage: 'assets/garbage_truck.png',
-                              aboutService:
-                                  'Looking for reliable garbage collection services? Look no further! Our professional team offers affordable and efficient garbage pickup and disposal for residential and commercial properties. We provide flexible scheduling, convenient curbside pickup, and eco-friendly waste management solutions. Say goodbye to your garbage worries with our top-notch. 10\$ per hour service',
-                              serviceSubName: 'subscription',
-                              avaiableOption: 'Residential'),
-                        ),
-                      );
-                    },
-                  ),
-                  SingalProduct(
-                    productImage: 'assets/recycle.png',
-                    productName: 'Recycle Service',
-                    productSubTitle: 'Free',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ServiceOverview(
-                              serviceName: 'Recycle Service',
-                              serviceImage: 'assets/recycle.png',
-                              aboutService:
-                                  'Our free recycle service offers convenient collection of recyclable materials, including paper, plastic, glass, and metal. We come to your location to pick up items, saving you time and effort. Help protect the environment by choosing our service to ensure your recyclables are properly handled and diverted from landfills.',
-                              serviceSubName: 'Free',
-                              avaiableOption: 'Residential'),
-                        ),
-                      );
-                    },
-                  ),
-                  SingalProduct(
-                    productImage: 'assets/transportation.png',
-                    productName: 'Transportation',
-                    productSubTitle: 'service',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ServiceOverview(
-                              serviceName: 'Transportation',
-                              serviceImage: 'assets/transportation.png',
-                              aboutService:
-                                  "Our paid transportation service offers reliable and efficient transportation solutions for individuals and businesses. With a fleet of well-maintained vehicles and professional drivers, we ensure safe and timely delivery of goods and passengers. Whether it's local or long-distance, our service provides a seamless and hassle-free transportation experience.",
-                              serviceSubName: 'service',
-                              avaiableOption: 'Residential/commercial'),
-                        ),
-                      );
-                    },
-                  ),
-                  SingalProduct(
-                    productImage: 'assets/hazardous.png',
-                    productName: 'Hazardous waste',
-                    productSubTitle: 'management',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ServiceOverview(
-                              serviceName: 'Hazardous waste',
-                              serviceImage: 'assets/hazardous.png',
-                              aboutService:
-                                  'Our paid hazardous waste service provides safe and compliant disposal solutions for businesses and industries. With specialized equipment and trained professionals, we handle the collection, transportation, and disposal of hazardous materials. Ensure environmental responsibility and legal compliance with our reliable and expert hazardous waste management service.',
-                              serviceSubName: 'management',
-                              avaiableOption: 'Residential/commercial'),
-                        ),
-                      );
-                    },
-                  ),
-                  SingalProduct(
-                    productImage: 'assets/cleaner.png',
-                    productName: 'Cleaner Service',
-                    productSubTitle: 'subscription',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ServiceOverview(
-                              serviceName: 'Cleaner Service',
-                              serviceImage: 'assets/cleaner.png',
-                              aboutService:
-                                  'Our paid cleaner service offers professional and thorough cleaning for homes, offices, and commercial spaces. Our experienced team uses eco-friendly products and modern equipment to ensure a spotless and sanitized environment. With flexible scheduling and personalized attention, we provide a reliable and efficient cleaning solution for your needs.',
-                              serviceSubName: 'subscription',
-                              avaiableOption: 'Residential'),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                children: serviceProvider.getServiceDataList.map(
+                  (serviceData) {
+                    return SingalProduct(
+                      productImage: serviceData.serviceImage,
+                      productName: serviceData.serviceName,
+                      productSubTitle: serviceData.serviceSubName,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ServiceOverview(
+                              serviceName: serviceData.serviceName,
+                              serviceImage: serviceData.serviceImage,
+                              aboutService: serviceData.aboutService,
+                              serviceSubName: serviceData.serviceSubName,
+                              avaiableOption: serviceData.serviceOption,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ).toList(),
+                // children: [
+
+                // ],
               ),
             ),
             Padding(
