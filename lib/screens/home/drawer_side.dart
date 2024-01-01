@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
+import 'package:waste_management_and_recycle_application/screens/my_profile/my_profile.dart';
+import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
+import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 
 class DrawerSide extends StatelessWidget {
-  Widget listTile({required IconData icon, required String title}) {
+  Widget listTile(
+      {required IconData icon,
+      required String title,
+      required Function onTap}) {
     return ListTile(
+      onTap: () => onTap(),
       leading: Icon(
         icon,
         size: 25,
@@ -75,15 +83,72 @@ class DrawerSide extends StatelessWidget {
                 ],
               ),
             ),
-            listTile(icon: Icons.home, title: 'Home'),
-            listTile(icon: Icons.account_box, title: 'My Profile'),
-            listTile(icon: Icons.notifications, title: 'Notification'),
-            listTile(icon: Icons.cleaning_services, title: 'Ouer Service'),
-            listTile(icon: Icons.location_on_outlined, title: 'Pickup Points'),
-            listTile(icon: Icons.subscriptions_outlined, title: 'Subscription'),
             listTile(
-                icon: Icons.rate_review_outlined, title: 'Rating & Review'),
-            listTile(icon: Icons.message_rounded, title: 'FAQs'),
+              icon: Icons.home,
+              title: 'Home',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
+            ),
+            listTile(
+              icon: Icons.account_box,
+              title: 'My Profile',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MyProfile(),
+                  ),
+                );
+              },
+            ),
+            listTile(
+              icon: Icons.notifications,
+              title: 'Notification',
+              onTap: () {},
+            ),
+            listTile(
+              icon: Icons.cleaning_services,
+              title: 'Our Service',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ServiceOverview(
+                        serviceName: 'Garbage Service',
+                        serviceImage: 'assets/garbage_truck.png',
+                        aboutService:
+                            'Looking for reliable garbage collection services? Look no further! Our professional team offers affordable and efficient garbage pickup and disposal for residential and commercial properties. We provide flexible scheduling, convenient curbside pickup, and eco-friendly waste management solutions. Say goodbye to your garbage worries with our top-notch. 10\$ per hour service',
+                        serviceSubName: 'subscription',
+                        avaiableOption: 'Residential'),
+                  ),
+                );
+              },
+            ),
+            listTile(
+              icon: Icons.location_on,
+              title: 'Pickup Points',
+              onTap: () {},
+            ),
+            listTile(
+              icon: Icons.subscriptions,
+              title: 'Subscription',
+              onTap: () {},
+            ),
+            listTile(
+              icon: Icons.shop_2,
+              title: 'Service Cart',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ReviewService(),
+                  ),
+                );
+              },
+            ),
+            listTile(icon: Icons.message_rounded, title: 'FAQs', onTap: () {}),
             Container(
               height: 350,
               padding: EdgeInsets.symmetric(horizontal: 20),

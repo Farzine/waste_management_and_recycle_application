@@ -15,6 +15,8 @@ dependencies:
   flutter_signin_button: 2.0.0
   google_sign_in: 5.4.4
   firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
+  provider: ^6.1.1
 
 dev_dependencies:
   flutter_test:
@@ -37,5 +39,6 @@ flutter:
     - assets/eWaste.png
     - assets/plastic_waste.png
     - assets/Garbage.png
+    - assets/profile_pic.png
 
   uses-material-design: true
