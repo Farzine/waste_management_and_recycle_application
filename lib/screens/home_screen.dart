@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
+import 'package:waste_management_and_recycle_application/providers/wasteType_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
 import 'package:waste_management_and_recycle_application/screens/home/waste_type.dart';
@@ -16,16 +17,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late ServiceProvider serviceProvider;
+  late WasteTypeProvider wasteTypeProvider;
   @override
   void initState() {
     ServiceProvider serviceProvider = Provider.of(context, listen: false);
     serviceProvider.fatchServiceData();
+    WasteTypeProvider wasteTypeProvider = Provider.of(context, listen: false);
+    wasteTypeProvider.fatchWasteTypeData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     serviceProvider = Provider.of(context);
+    wasteTypeProvider = Provider.of(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 184, 180, 180),
       drawer: DrawerSide(),
@@ -239,9 +244,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ).toList(),
-                // children: [
-
-                // ],
               ),
             ),
             Padding(
@@ -269,88 +271,26 @@ class _HomeScreenState extends State<HomeScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  WasteType(
-                    WasteTypeImage: 'assets/solid_waste.png',
-                    WasteTypeName: 'Solid Waste',
-                    WasteTypeSubTitle: 'municipal waste',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WasteTypeOverview(
-                            wasteTypeImage: 'assets/solid_waste.png',
-                            wasteTypeName: 'Solid Waste',
-                            wasteTypeSubName: 'municipal waste',
+                children: wasteTypeProvider.getWasteTypeDataList.map(
+                  (wasteTypeData) {
+                    return WasteType(
+                      WasteTypeImage: wasteTypeData.wasteTypeImage,
+                      WasteTypeName: wasteTypeData.wasteTypeName,
+                      WasteTypeSubTitle: wasteTypeData.wasteTypeSubTitle,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => WasteTypeOverview(
+                              wasteTypeImage: wasteTypeData.wasteTypeImage,
+                              wasteTypeName: wasteTypeData.wasteTypeName,
+                              wasteTypeSubName: wasteTypeData.wasteTypeSubName,
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                  WasteType(
-                    WasteTypeImage: 'assets/organic_waste.png',
-                    WasteTypeName: 'Organic waste',
-                    WasteTypeSubTitle: 'residential waste',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WasteTypeOverview(
-                            wasteTypeImage: 'assets/organic_waste.png',
-                            wasteTypeName: 'Organic waste',
-                            wasteTypeSubName: 'residential waste',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  WasteType(
-                    WasteTypeImage: 'assets/medical_waste.png',
-                    WasteTypeName: 'Medical waste',
-                    WasteTypeSubTitle: 'municipal waste',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WasteTypeOverview(
-                            wasteTypeImage: 'assets/medical_waste.png',
-                            wasteTypeName: 'Medical waste',
-                            wasteTypeSubName: 'municipal waste',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  WasteType(
-                    WasteTypeImage: 'assets/eWaste.png',
-                    WasteTypeName: 'Electronic Waste',
-                    WasteTypeSubTitle: 'residential waste',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WasteTypeOverview(
-                            wasteTypeImage: 'assets/eWaste.png',
-                            wasteTypeName: 'Electronic Waste',
-                            wasteTypeSubName: 'residential waste',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  WasteType(
-                    WasteTypeImage: 'assets/plastic_waste.png',
-                    WasteTypeName: 'Plastic waste',
-                    WasteTypeSubTitle: 'residential',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => WasteTypeOverview(
-                            wasteTypeImage: 'assets/plastic_waste.png',
-                            wasteTypeName: 'Plastic waste',
-                            wasteTypeSubName: 'residential waste',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                        );
+                      },
+                    );
+                  },
+                ).toList(),
               ),
             ),
           ],
