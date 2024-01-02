@@ -259,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Text(
-                    'Pickup point',
+                    'view all',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

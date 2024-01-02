@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
+import 'package:waste_management_and_recycle_application/screens/my_profile/my_profile.dart';
+import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
 
 enum SigninCharacter { fill, outline }
 
@@ -19,35 +22,36 @@ class WasteTypeOverview extends StatefulWidget {
 
 class _WasteTypeOverviewState extends State<WasteTypeOverview> {
   SigninCharacter _character = SigninCharacter.fill;
-  Widget bottomNavigationBar(
-      {required Color iconColor,
-      required Color backgroundColor,
-      required Color color,
-      required String title,
-      required IconData iconData}) {
+  Widget bottomNavigationBar({
+    required String title,
+    required IconData iconData,
+    required Function onTap,
+  }) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(20),
-        color: backgroundColor,
+        padding: EdgeInsets.all(15),
+        color: Color.fromARGB(255, 86, 161, 71),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               iconData,
               size: 23,
-              color: iconColor,
+              color: Colors.black,
             ),
             SizedBox(
               width: 1,
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                onTap();
+              },
               child: Text(
                 title,
                 style: TextStyle(
-                  color: color,
+                  color: Colors.black,
                 ),
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
               ),
               style: OutlinedButton.styleFrom(
                 backgroundColor: Color.fromARGB(255, 165, 248, 165),
@@ -66,23 +70,35 @@ class _WasteTypeOverviewState extends State<WasteTypeOverview> {
       bottomNavigationBar: Row(
         children: [
           bottomNavigationBar(
-            iconColor: Colors.black,
-            backgroundColor: Color.fromARGB(255, 86, 161, 71),
-            color: Colors.black,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
             title: 'Home',
             iconData: Icons.home,
           ),
           bottomNavigationBar(
-            iconColor: Colors.black,
-            backgroundColor: Color.fromARGB(255, 86, 161, 71),
-            color: Colors.black,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ReviewService(),
+                ),
+              );
+            },
             title: 'Next',
             iconData: Icons.forward_rounded,
           ),
           bottomNavigationBar(
-            iconColor: Colors.black,
-            backgroundColor: Color.fromARGB(255, 86, 161, 71),
-            color: Colors.black,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MyProfile(),
+                ),
+              );
+            },
             title: 'Profile',
             iconData: Icons.person,
           ),

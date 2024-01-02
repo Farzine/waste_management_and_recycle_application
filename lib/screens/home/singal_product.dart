@@ -30,7 +30,6 @@ class SingalProduct extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Image(
-                    // image: AssetImage('assets/garbage_truck.png'),
                     image: AssetImage(productImage),
                   ),
                 ),
