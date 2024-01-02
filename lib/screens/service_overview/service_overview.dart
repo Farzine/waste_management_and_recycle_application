@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
+import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
 
 enum SigninCharacter { fill, outline }
 
@@ -23,30 +25,40 @@ class ServiceOverview extends StatefulWidget {
 class _ServiceOverviewState extends State<ServiceOverview> {
   SigninCharacter _character = SigninCharacter.fill;
 
-  Widget bottomNavigationBar(
-      {required Color iconColor,
-      required Color backgroundColor,
-      required Color color,
-      required String title,
-      required IconData iconData}) {
+  Widget bottomNavigationBar({
+    required String title,
+    required IconData iconData,
+    required Function onTap,
+  }) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(20),
-        color: backgroundColor,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        color: Color.fromARGB(255, 86, 161, 71),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               iconData,
-              size: 17,
-              color: iconColor,
+              size: 25,
+              color: Colors.black,
             ),
             SizedBox(
-              width: 5,
+              width: 1,
             ),
-            Text(
-              title,
-              style: TextStyle(color: color),
+            OutlinedButton(
+              onPressed: () {
+                onTap();
+              },
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 165, 248, 165),
+              ),
             ),
           ],
         ),
@@ -61,16 +73,24 @@ class _ServiceOverviewState extends State<ServiceOverview> {
       bottomNavigationBar: Row(
         children: [
           bottomNavigationBar(
-            iconColor: Colors.black,
-            backgroundColor: Color.fromARGB(255, 86, 161, 71),
-            color: Colors.black,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ReviewService(),
+                ),
+              );
+            },
             title: 'Proceed to continue',
             iconData: Icons.arrow_circle_right_outlined,
           ),
           bottomNavigationBar(
-            iconColor: Colors.black,
-            backgroundColor: Color.fromARGB(255, 207, 123, 104),
-            color: Colors.black,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
+            },
             title: 'Back to home',
             iconData: Icons.arrow_circle_left_outlined,
           ),

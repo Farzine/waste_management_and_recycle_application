@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/auth/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
+import 'package:waste_management_and_recycle_application/providers/wasteType_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
 void main() async {
@@ -24,8 +25,15 @@ void main() async {
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ServiceProvider>(
-      create: (context) => ServiceProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ServiceProvider>(
+          create: (context) => ServiceProvider(),
+        ),
+        ChangeNotifierProvider<WasteTypeProvider>(
+          create: (context) => WasteTypeProvider(),
+        ),
+      ],
       child: MaterialApp(
         home: SignIn(),
       ),

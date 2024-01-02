@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:waste_management_and_recycle_application/models/service_model.dart';
 import 'package:waste_management_and_recycle_application/widgets/singleItem.dart';
 
-class Search extends StatelessWidget {
+class Search extends StatefulWidget {
+  final List<ServiceModel> search;
+  Search({required this.search});
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  String query = "";
+  searchItem(String query) {
+    List<ServiceModel> searchService = widget.search.where((element) {
+      return element.serviceName.toLowerCase().contains(query);
+    }).toList();
+    return searchService;
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<ServiceModel> _searchItem = searchItem(query);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 165, 248, 165),
       appBar: AppBar(
@@ -31,6 +48,12 @@ class Search extends StatelessWidget {
             height: 52,
             margin: EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
+              onChanged: (value) {
+                print(value);
+                setState(() {
+                  query = value;
+                });
+              },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -46,30 +69,42 @@ class Search extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          SingleItem(
-            searchItemName: 'Recycle Service',
-            searchItemImage: 'assets/recycle.png',
-            searchItemSubName: 'Free',
-            isbool: false,
+          Column(
+            children: _searchItem.map(
+              (data) {
+                return SingleItem(
+                  serviceName: data.serviceName,
+                  serviceImage: data.serviceImage,
+                  serviceSubName: data.serviceSubName,
+                  isbool: false,
+                );
+              },
+            ).toList(),
           ),
-          SingleItem(
-            searchItemName: 'Transportation',
-            searchItemImage: 'assets/transportation.png',
-            searchItemSubName: 'Residential',
-            isbool: false,
-          ),
-          SingleItem(
-            searchItemName: 'Medical waste',
-            searchItemImage: 'assets/medical_waste.png',
-            searchItemSubName: 'Municiplle',
-            isbool: false,
-          ),
-          SingleItem(
-            searchItemName: 'Plastic Waste',
-            searchItemImage: 'assets/plastic_waste.png',
-            searchItemSubName: 'Residential',
-            isbool: false,
-          ),
+          // SingleItem(
+          //   searchItemName: 'Recycle Service',
+          //   searchItemImage: 'assets/recycle.png',
+          //   searchItemSubName: 'Free',
+          //   isbool: false,
+          // ),
+          // SingleItem(
+          //   searchItemName: 'Transportation',
+          //   searchItemImage: 'assets/transportation.png',
+          //   searchItemSubName: 'Residential',
+          //   isbool: false,
+          // ),
+          // SingleItem(
+          //   searchItemName: 'Medical waste',
+          //   searchItemImage: 'assets/medical_waste.png',
+          //   searchItemSubName: 'Municiplle',
+          //   isbool: false,
+          // ),
+          // SingleItem(
+          //   searchItemName: 'Plastic Waste',
+          //   searchItemImage: 'assets/plastic_waste.png',
+          //   searchItemSubName: 'Residential',
+          //   isbool: false,
+          // ),
         ],
       ),
     );
