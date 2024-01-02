@@ -7,6 +7,7 @@ import 'package:waste_management_and_recycle_application/models/waste_type_model
 class ServiceProvider with ChangeNotifier {
   List<ServiceModel> serviceList = [];
   late ServiceModel serviceModel;
+  List<ServiceModel> search = [];
 
   fatchServiceData() async {
     List<ServiceModel> newList = [];
@@ -22,6 +23,7 @@ class ServiceProvider with ChangeNotifier {
           aboutService: element.get('aboutService'),
           serviceOption: element.get('serviceOption'),
         );
+        search.add(serviceModel);
 
         newList.add(serviceModel);
       },
@@ -32,5 +34,10 @@ class ServiceProvider with ChangeNotifier {
 
   List<ServiceModel> get getServiceDataList {
     return serviceList;
+  }
+
+  //// search command
+  List<ServiceModel> get getAllServiceSearch {
+    return search;
   }
 }

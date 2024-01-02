@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class SingleItem extends StatelessWidget {
   bool isbool = false;
 
-  final String searchItemName;
-  final String searchItemSubName;
-  final String searchItemImage;
+  final String serviceName;
+  final String serviceSubName;
+  final String serviceImage;
 
   SingleItem(
-      {required this.searchItemName,
-      required this.searchItemSubName,
-      required this.searchItemImage,
+      {required this.serviceName,
+      required this.serviceSubName,
+      required this.serviceImage,
       required this.isbool});
 
   @override
@@ -25,7 +25,7 @@ class SingleItem extends StatelessWidget {
                 child: Container(
                   height: 100,
                   child: Center(
-                    child: Image.asset(searchItemImage),
+                    child: Image.asset(serviceImage),
                   ),
                 ),
               ),
@@ -43,13 +43,13 @@ class SingleItem extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              searchItemName,
+                              serviceName,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              searchItemSubName,
+                              serviceSubName,
                             ),
                           ],
                         ),
