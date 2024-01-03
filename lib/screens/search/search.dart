@@ -73,38 +73,18 @@ class _SearchState extends State<Search> {
             children: _searchItem.map(
               (data) {
                 return SingleItem(
+                  serviceId: data.serviceId,
+                  servicePrice: data.servicePrice,
+                  serviceQuantity: data.serviceQuantity,
                   serviceName: data.serviceName,
                   serviceImage: data.serviceImage,
                   serviceSubName: data.serviceSubName,
                   isbool: false,
+                  onDelete: () {},
                 );
               },
             ).toList(),
           ),
-          // SingleItem(
-          //   searchItemName: 'Recycle Service',
-          //   searchItemImage: 'assets/recycle.png',
-          //   searchItemSubName: 'Free',
-          //   isbool: false,
-          // ),
-          // SingleItem(
-          //   searchItemName: 'Transportation',
-          //   searchItemImage: 'assets/transportation.png',
-          //   searchItemSubName: 'Residential',
-          //   isbool: false,
-          // ),
-          // SingleItem(
-          //   searchItemName: 'Medical waste',
-          //   searchItemImage: 'assets/medical_waste.png',
-          //   searchItemSubName: 'Municiplle',
-          //   isbool: false,
-          // ),
-          // SingleItem(
-          //   searchItemName: 'Plastic Waste',
-          //   searchItemImage: 'assets/plastic_waste.png',
-          //   searchItemSubName: 'Residential',
-          //   isbool: false,
-          // ),
         ],
       ),
     );

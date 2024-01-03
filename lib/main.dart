@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/auth/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
+import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/wasteType_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
@@ -32,6 +34,12 @@ class MainApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<WasteTypeProvider>(
           create: (context) => WasteTypeProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider<ReviewServiceProvider>(
+          create: (context) => ReviewServiceProvider(),
         ),
       ],
       child: MaterialApp(

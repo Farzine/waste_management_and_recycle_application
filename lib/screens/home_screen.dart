@@ -244,6 +244,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => ServiceOverview(
+                              servicePrice: serviceData.servicePrice,
+                              serviceQuantity: serviceData.serviceQuantity,
+                              serviceId: serviceData.serviceId,
                               serviceName: serviceData.serviceName,
                               serviceImage: serviceData.serviceImage,
                               aboutService: serviceData.aboutService,

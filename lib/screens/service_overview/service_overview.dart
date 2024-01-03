@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
+import 'package:waste_management_and_recycle_application/widgets/count.dart';
 
 enum SigninCharacter { fill, outline }
 
@@ -10,7 +11,13 @@ class ServiceOverview extends StatefulWidget {
   final String serviceImage;
   final String aboutService;
   final String avaiableOption;
+  final String serviceId;
+  final int servicePrice;
+  final int serviceQuantity;
   ServiceOverview({
+    required this.servicePrice,
+    required this.serviceQuantity,
+    required this.serviceId,
     required this.serviceName,
     required this.serviceImage,
     required this.aboutService,
@@ -163,25 +170,13 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                           ],
                         ),
                         Text(widget.avaiableOption ?? "null"),
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 86, 161, 71),
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                size: 20,
-                                color: Colors.black,
-                              ),
-                              Text('Contact'),
-                            ],
-                          ),
+                        Count(
+                          serviceQuantity: widget.serviceQuantity,
+                          serviceSubName: widget.serviceSubName,
+                          serviceId: widget.serviceId,
+                          serviceImage: widget.serviceImage,
+                          serviceName: widget.serviceName,
+                          servicePrice: widget.servicePrice,
                         ),
                       ],
                     ),

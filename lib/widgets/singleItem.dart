@@ -6,12 +6,21 @@ class SingleItem extends StatelessWidget {
   final String serviceName;
   final String serviceSubName;
   final String serviceImage;
+  final int servicePrice;
+  final int serviceQuantity;
+  String serviceId;
+  Function onDelete;
 
-  SingleItem(
-      {required this.serviceName,
-      required this.serviceSubName,
-      required this.serviceImage,
-      required this.isbool});
+  SingleItem({
+    required this.onDelete,
+    required this.serviceId,
+    required this.servicePrice,
+    required this.serviceQuantity,
+    required this.serviceName,
+    required this.serviceSubName,
+    required this.serviceImage,
+    required this.isbool,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +77,7 @@ class SingleItem extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: Text('5 KG'),
+                                    child: Text('$serviceQuantity' + ' KG'),
                                   ),
                                   Center(
                                     child: Icon(
@@ -80,7 +89,15 @@ class SingleItem extends StatelessWidget {
                                 ],
                               ),
                             )
-                          : Text('\$ 50.00'),
+                          : Row(
+                              children: [
+                                Text('\$ ' + '$servicePrice'),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text('$serviceQuantity' + ' KG'),
+                              ],
+                            ),
                     ],
                   ),
                 ),
@@ -114,39 +131,52 @@ class SingleItem extends StatelessWidget {
                             ),
                           ),
                         )
-                      : Column(
-                          children: [
-                            Icon(
-                              Icons.delete,
-                              size: 30,
-                              color: Colors.black,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              height: 20,
-                              width: 70,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 86, 161, 71),
-                                border: Border.all(color: Colors.white60),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                    Text('ADD'),
-                                  ],
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  onDelete();
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  size: 30,
+                                  color: Colors.black,
                                 ),
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                height: 30,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 86, 161, 71),
+                                  border: Border.all(color: Colors.white60),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.remove,
+                                        color: Colors.black,
+                                        size: 20,
+                                      ),
+                                      Text('5 KG'),
+                                      Icon(
+                                        Icons.add,
+                                        color: Colors.black,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                 ),
               ),
