@@ -25,6 +25,33 @@ class ReviewServiceProvider with ChangeNotifier {
         "cartPrice": cartPrice,
         "cartQuantity": cartQuantity,
         "cartSubName": cartSubName,
+        "isAdd": true,
+      },
+    );
+  }
+
+  void updateReviewServiceData({
+    String? cartID,
+    String? cartName,
+    String? cartImage,
+    String? cartSubName,
+    int? cartPrice,
+    int? cartQuantity,
+  }) async {
+    FirebaseFirestore.instance
+        .collection('ReviewCart')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('YourReviewCart')
+        .doc(cartID)
+        .update(
+      {
+        "cartID": cartID,
+        "cartName": cartName,
+        "cartImage": cartImage,
+        "cartPrice": cartPrice,
+        "cartQuantity": cartQuantity,
+        "cartSubName": cartSubName,
+        "isAdd": true,
       },
     );
   }
@@ -54,5 +81,16 @@ class ReviewServiceProvider with ChangeNotifier {
 
   List<ReviewCartModel> get getReviewCartDataList {
     return reviewCartDataList;
+  }
+
+  /////// ReviewCart Delete Function///////
+  reviewCartDataDelete(cartID) {
+    FirebaseFirestore.instance
+        .collection('ReviewCart')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('YourReviewCart')
+        .doc(cartID)
+        .delete();
+    notifyListeners();
   }
 }

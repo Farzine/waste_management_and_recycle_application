@@ -5,9 +5,49 @@ import 'package:waste_management_and_recycle_application/providers/review_servic
 import 'package:waste_management_and_recycle_application/widgets/singleItem.dart';
 
 class ReviewService extends StatelessWidget {
+  late ReviewServiceProvider reviewServiceProvider;
+  showAlertDialog(BuildContext context, ReviewCartModel delete) {
+    Widget cancelButton = TextButton(
+      child: Text(
+        "Cancel",
+        style: TextStyle(color: Colors.black),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(
+        "Delete",
+        style: TextStyle(color: Colors.black),
+      ),
+      onPressed: () {
+        reviewServiceProvider.reviewCartDataDelete(delete.cartID);
+        Navigator.of(context).pop();
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      backgroundColor: Color.fromARGB(255, 165, 248, 165),
+      title: Text("Review service"),
+      content: Text("Do you want to delete the service?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    ReviewServiceProvider reviewServiceProvider = Provider.of(context);
+    reviewServiceProvider = Provider.of(context);
     reviewServiceProvider.getReviewCartData();
     return Scaffold(
       bottomNavigationBar: ListTile(
@@ -70,32 +110,13 @@ class ReviewService extends StatelessWidget {
                       servicePrice: data.cartPrice,
                       serviceQuantity: data.cartQuantity,
                       isbool: true,
+                      onDelete: () {
+                        showAlertDialog(context, data);
+                      },
                     ),
                   ],
                 );
               },
-              // children: [
-
-              //   SingleItem(
-              //     servicePrice: "",
-              //     serviceQuantity: "",
-              //     serviceName: 'Medical waste',
-              //     serviceImage: 'assets/medical_waste.png',
-              //     serviceSubName: 'Municiplle',
-              //     isbool: true,
-              //   ),
-              //   SingleItem(
-              //     servicePrice: "",
-              //     serviceQuantity: "",
-              //     serviceName: 'Plastic Waste',
-              //     serviceImage: 'assets/plastic_waste.png',
-              //     serviceSubName: 'Residential',
-              //     isbool: true,
-              //   ),
-              //   SizedBox(
-              //     height: 10,
-              //   ),
-              // ],
             ),
     );
   }

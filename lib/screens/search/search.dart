@@ -80,6 +80,7 @@ class _SearchState extends State<Search> {
                   serviceImage: data.serviceImage,
                   serviceSubName: data.serviceSubName,
                   isbool: false,
+                  onDelete: () {},
                 );
               },
             ).toList(),
