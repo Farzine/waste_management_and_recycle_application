@@ -17,6 +17,7 @@ class ServiceProvider with ChangeNotifier {
     value.docs.forEach(
       (element) {
         serviceModel = ServiceModel(
+          serviceId: element.get('serviceId'),
           serviceName: element.get('serviceName'),
           serviceImage: element.get('serviceImage'),
           serviceSubName: element.get('serviceSubName'),

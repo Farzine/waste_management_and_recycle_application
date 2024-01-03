@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 
 class Count extends StatefulWidget {
+  String serviceName;
+  String serviceImage;
+  String serviceID;
+
+  String servicePrice;
+  Count({
+    required this.serviceName,
+    required this.serviceID,
+    required this.serviceImage,
+    required this.servicePrice,
+  });
+
   @override
   State<Count> createState() => _CountState();
 }
@@ -10,6 +24,7 @@ class _CountState extends State<Count> {
   bool istrue = false;
   @override
   Widget build(BuildContext context) {
+    ReviewServiceProvider reviewServiceProvider = Provider.of(context);
     return Container(
       height: 25,
       width: 100,
@@ -75,6 +90,13 @@ class _CountState extends State<Count> {
                   setState(() {
                     istrue = true;
                   });
+                  reviewServiceProvider.addReviewServiceData(
+                    cartID: widget.serviceID,
+                    cartImage: widget.serviceImage,
+                    cartName: widget.serviceName,
+                    cartPrice: widget.servicePrice,
+                    cartQuantity: count,
+                  );
                 },
                 child: Text(
                   'Get Service',
