@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
+import 'package:waste_management_and_recycle_application/widgets/count.dart';
 
 enum SigninCharacter { fill, outline }
 
@@ -163,26 +164,57 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                           ],
                         ),
                         Text(widget.avaiableOption ?? "null"),
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 86, 161, 71),
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                size: 20,
-                                color: Colors.black,
-                              ),
-                              Text('Contact'),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   padding:
+                        //       EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                        //   decoration: BoxDecoration(
+                        //     color: Color.fromARGB(255, 86, 161, 71),
+                        //     border: Border.all(color: Colors.white),
+                        //     borderRadius: BorderRadius.circular(30),
+                        //   ),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Icon(
+                        //         Icons.add,
+                        //         size: 20,
+                        //         color: Colors.black,
+                        //       ),
+                        //       Text('Get Service'),
+                        //     ],
+                        //   ),
+                        // ),
+                        ////////////////////////////////
+                        // Container(
+                        //   height: 25,
+                        //   width: 50,
+                        //   decoration: BoxDecoration(
+                        //     border: Border.all(color: Colors.grey),
+                        //     borderRadius: BorderRadius.circular(8),
+                        //   ),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Icon(
+                        //         Icons.remove,
+                        //         size: 15,
+                        //         color: Colors.black,
+                        //       ),
+                        //       Text(
+                        //         '1',
+                        //         style: TextStyle(
+                        //             color: Colors.black,
+                        //             fontWeight: FontWeight.bold),
+                        //       ),
+                        //       Icon(
+                        //         Icons.add,
+                        //         size: 15,
+                        //         color: Colors.black,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        Count(),
                       ],
                     ),
                   ),

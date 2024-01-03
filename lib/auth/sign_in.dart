@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
 class SignIn extends StatefulWidget {
@@ -11,6 +13,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  late UserProvider userProvider;
   _googleSignUp() async {
     try {
       final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -30,12 +33,20 @@ class _SignInState extends State<SignIn> {
       final User? user = (await _auth.signInWithCredential(credential)).user;
       // print("signed in " + user.displayName);
 
+      userProvider.addUserData(
+        currentUser: user,
+        userName: user!.displayName,
+        userImage: user.photoURL,
+        userEmail: user.email,
+      );
+
       return user;
     } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
+    userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: Container(
         height: double.infinity,
