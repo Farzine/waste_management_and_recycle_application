@@ -117,6 +117,8 @@ class DrawerSide extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => ServiceOverview(
+                        servicePrice: 50,
+                        serviceQuantity: 5,
                         serviceId: 'AbdETQa0DXHoMXsG9fvR',
                         serviceName: 'Garbage Service',
                         serviceImage: 'assets/garbage_truck.png',

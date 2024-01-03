@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/models/review_service_model.dart';
+import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/widgets/singleItem.dart';
 
 class ReviewService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ReviewServiceProvider reviewServiceProvider = Provider.of(context);
+    reviewServiceProvider.getReviewCartData();
     return Scaffold(
       bottomNavigationBar: ListTile(
         title: Text(
@@ -43,34 +48,55 @@ class ReviewService extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          SingleItem(
-            serviceName: 'Transportation',
-            serviceImage: 'assets/transportation.png',
-            serviceSubName: 'Residential',
-            isbool: true,
-          ),
-          SingleItem(
-            serviceName: 'Medical waste',
-            serviceImage: 'assets/medical_waste.png',
-            serviceSubName: 'Municiplle',
-            isbool: true,
-          ),
-          SingleItem(
-            serviceName: 'Plastic Waste',
-            serviceImage: 'assets/plastic_waste.png',
-            serviceSubName: 'Residential',
-            isbool: true,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
+      body: reviewServiceProvider.getReviewCartDataList.isEmpty
+          ? Center(
+              child: Text('No Data'),
+            )
+          : ListView.builder(
+              itemCount: reviewServiceProvider.getReviewCartDataList.length,
+              itemBuilder: (context, index) {
+                ReviewCartModel data =
+                    reviewServiceProvider.getReviewCartDataList[index];
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SingleItem(
+                      serviceId: data.cartID,
+                      serviceName: data.cartName,
+                      serviceImage: data.cartImage,
+                      serviceSubName: data.cartSubName,
+                      servicePrice: data.cartPrice,
+                      serviceQuantity: data.cartQuantity,
+                      isbool: true,
+                    ),
+                  ],
+                );
+              },
+              // children: [
+
+              //   SingleItem(
+              //     servicePrice: "",
+              //     serviceQuantity: "",
+              //     serviceName: 'Medical waste',
+              //     serviceImage: 'assets/medical_waste.png',
+              //     serviceSubName: 'Municiplle',
+              //     isbool: true,
+              //   ),
+              //   SingleItem(
+              //     servicePrice: "",
+              //     serviceQuantity: "",
+              //     serviceName: 'Plastic Waste',
+              //     serviceImage: 'assets/plastic_waste.png',
+              //     serviceSubName: 'Residential',
+              //     isbool: true,
+              //   ),
+              //   SizedBox(
+              //     height: 10,
+              //   ),
+              // ],
+            ),
     );
   }
 }

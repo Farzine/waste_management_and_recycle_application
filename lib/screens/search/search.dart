@@ -73,6 +73,9 @@ class _SearchState extends State<Search> {
             children: _searchItem.map(
               (data) {
                 return SingleItem(
+                  serviceId: data.serviceId,
+                  servicePrice: data.servicePrice,
+                  serviceQuantity: data.serviceQuantity,
                   serviceName: data.serviceName,
                   serviceImage: data.serviceImage,
                   serviceSubName: data.serviceSubName,

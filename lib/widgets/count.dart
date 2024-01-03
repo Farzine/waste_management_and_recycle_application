@@ -5,12 +5,15 @@ import 'package:waste_management_and_recycle_application/providers/review_servic
 class Count extends StatefulWidget {
   String serviceName;
   String serviceImage;
-  String serviceID;
-
-  String servicePrice;
+  String serviceId;
+  String serviceSubName;
+  int servicePrice;
+  int serviceQuantity;
   Count({
+    required this.serviceQuantity,
+    required this.serviceSubName,
     required this.serviceName,
-    required this.serviceID,
+    required this.serviceId,
     required this.serviceImage,
     required this.servicePrice,
   });
@@ -91,10 +94,11 @@ class _CountState extends State<Count> {
                     istrue = true;
                   });
                   reviewServiceProvider.addReviewServiceData(
-                    cartID: widget.serviceID,
+                    cartID: widget.serviceId,
                     cartImage: widget.serviceImage,
                     cartName: widget.serviceName,
-                    cartPrice: widget.servicePrice,
+                    cartSubName: widget.serviceSubName,
+                    cartPrice: widget.servicePrice * count,
                     cartQuantity: count,
                   );
                 },

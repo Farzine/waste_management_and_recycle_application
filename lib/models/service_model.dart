@@ -5,8 +5,12 @@ class ServiceModel {
   String aboutService;
   String serviceOption;
   String serviceId;
+  int servicePrice;
+  int serviceQuantity;
 
   ServiceModel({
+    required this.servicePrice,
+    required this.serviceQuantity,
     required this.serviceId,
     required this.serviceName,
     required this.serviceImage,

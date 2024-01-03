@@ -6,12 +6,19 @@ class SingleItem extends StatelessWidget {
   final String serviceName;
   final String serviceSubName;
   final String serviceImage;
+  final int servicePrice;
+  final int serviceQuantity;
+  String serviceId;
 
-  SingleItem(
-      {required this.serviceName,
-      required this.serviceSubName,
-      required this.serviceImage,
-      required this.isbool});
+  SingleItem({
+    required this.serviceId,
+    required this.servicePrice,
+    required this.serviceQuantity,
+    required this.serviceName,
+    required this.serviceSubName,
+    required this.serviceImage,
+    required this.isbool,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +75,7 @@ class SingleItem extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: Text('5 KG'),
+                                    child: Text('$serviceQuantity' + ' KG'),
                                   ),
                                   Center(
                                     child: Icon(
@@ -80,7 +87,7 @@ class SingleItem extends StatelessWidget {
                                 ],
                               ),
                             )
-                          : Text('\$ 50.00'),
+                          : Text('\$ ' + '$servicePrice'),
                     ],
                   ),
                 ),

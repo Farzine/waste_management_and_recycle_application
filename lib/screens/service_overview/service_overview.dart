@@ -12,7 +12,11 @@ class ServiceOverview extends StatefulWidget {
   final String aboutService;
   final String avaiableOption;
   final String serviceId;
+  final int servicePrice;
+  final int serviceQuantity;
   ServiceOverview({
+    required this.servicePrice,
+    required this.serviceQuantity,
     required this.serviceId,
     required this.serviceName,
     required this.serviceImage,
@@ -167,10 +171,12 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                         ),
                         Text(widget.avaiableOption ?? "null"),
                         Count(
-                          serviceID: widget.serviceId,
+                          serviceQuantity: widget.serviceQuantity,
+                          serviceSubName: widget.serviceSubName,
+                          serviceId: widget.serviceId,
                           serviceImage: widget.serviceImage,
                           serviceName: widget.serviceName,
-                          servicePrice: '50\$',
+                          servicePrice: widget.servicePrice,
                         ),
                       ],
                     ),
