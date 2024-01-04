@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/models/user_model.dart';
+import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 
-class MyProfile extends StatelessWidget {
+class MyProfile extends StatefulWidget {
+  UserModel userData;
+  MyProfile({required this.userData});
+
+  @override
+  State<MyProfile> createState() => _MyProfileState();
+}
+
+class _MyProfileState extends State<MyProfile> {
   @override
   Widget listTile({required IconData icon, required String title}) {
     return Column(
@@ -33,7 +44,7 @@ class MyProfile extends StatelessWidget {
           ),
         ),
       ),
-      drawer: DrawerSide(),
+      //drawer: DrawerSide(userProvider: userProvider),
       body: Stack(
         children: [
           Column(
@@ -70,7 +81,7 @@ class MyProfile extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Farzine Hosssen',
+                                    widget.userData.userName,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -79,7 +90,7 @@ class MyProfile extends StatelessWidget {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text('farzine07@student.sust.edu'),
+                                  Text(widget.userData.userEmail),
                                 ],
                               ),
                               CircleAvatar(
@@ -122,7 +133,8 @@ class MyProfile extends StatelessWidget {
               radius: 50,
               backgroundColor: Colors.white60,
               child: CircleAvatar(
-                backgroundImage: AssetImage("assets/profile_pic.png"),
+                backgroundImage: NetworkImage(widget.userData.userImage ??
+                    'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'),
                 radius: 45,
                 backgroundColor: Color.fromARGB(255, 165, 248, 165),
               ),

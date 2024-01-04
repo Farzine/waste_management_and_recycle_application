@@ -170,6 +170,7 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                           ],
                         ),
                         Text(widget.avaiableOption ?? "null"),
+                        Text('  ${widget.servicePrice}\$ / KG '),
                         Count(
                           serviceQuantity: widget.serviceQuantity,
                           serviceSubName: widget.serviceSubName,

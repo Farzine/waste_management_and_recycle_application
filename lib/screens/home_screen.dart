@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
+import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/wasteType_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
@@ -29,11 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context);
     serviceProvider = Provider.of(context);
     wasteTypeProvider = Provider.of(context);
+    userProvider.getUserData();
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 184, 180, 180),
-      drawer: DrawerSide(),
+      drawer: DrawerSide(userProvider: userProvider),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
@@ -307,6 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => WasteTypeOverview(
+                              userProvider: userProvider,
                               wasteTypeImage: wasteTypeData.wasteTypeImage,
                               wasteTypeName: wasteTypeData.wasteTypeName,
                               wasteTypeSubName: wasteTypeData.wasteTypeSubName,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waste_management_and_recycle_application/widgets/count.dart';
 
 class SingleItem extends StatelessWidget {
   bool isbool = false;
@@ -64,29 +65,88 @@ class SingleItem extends StatelessWidget {
                         ),
                       ),
                       isbool == false
-                          ? Container(
-                              margin: EdgeInsets.only(right: 15),
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              height: 30,
-                              width: 90,
-                              decoration: BoxDecoration(
-                                color: Colors.white54,
-                                border: Border.all(color: Colors.white60),
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text('$serviceQuantity' + ' KG'),
-                                  ),
-                                  Center(
-                                    child: Icon(
-                                      Icons.arrow_drop_down_circle_outlined,
-                                      size: 20,
-                                      color: Colors.black,
+                          ? InkWell(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 165, 248, 165),
+                                    context: context,
+                                    builder: (context) {
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          ListTile(
+                                            leading: Icon(
+                                              Icons.star_purple500_outlined,
+                                            ),
+                                            iconColor: Color.fromARGB(
+                                                255, 86, 161, 71),
+                                            title: new Text('5 KG'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading: Icon(
+                                              Icons.star_purple500_outlined,
+                                            ),
+                                            iconColor: Color.fromARGB(
+                                                255, 86, 161, 71),
+                                            title: new Text('10 KG'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading: Icon(
+                                              Icons.star_purple500_outlined,
+                                            ),
+                                            iconColor: Color.fromARGB(
+                                                255, 86, 161, 71),
+                                            title: new Text('20 KG'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading: Icon(
+                                              Icons.star_purple500_outlined,
+                                            ),
+                                            iconColor: Color.fromARGB(
+                                                255, 86, 161, 71),
+                                            title: new Text('> 20 KG'),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(right: 15),
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                height: 30,
+                                width: 90,
+                                decoration: BoxDecoration(
+                                  color: Colors.white54,
+                                  border: Border.all(color: Colors.white60),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text('$serviceQuantity' + ' KG'),
                                     ),
-                                  ),
-                                ],
+                                    Center(
+                                      child: Icon(
+                                        Icons.arrow_drop_down_circle_outlined,
+                                        size: 20,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           : Row(
@@ -150,7 +210,7 @@ class SingleItem extends StatelessWidget {
                               ),
                               Container(
                                 height: 30,
-                                width: 80,
+                                width: 200,
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(255, 86, 161, 71),
                                   border: Border.all(color: Colors.white60),
@@ -160,16 +220,13 @@ class SingleItem extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.remove,
-                                        color: Colors.black,
-                                        size: 20,
-                                      ),
-                                      Text('5 KG'),
-                                      Icon(
-                                        Icons.add,
-                                        color: Colors.black,
-                                        size: 20,
+                                      Count(
+                                        serviceQuantity: serviceQuantity,
+                                        serviceSubName: serviceSubName,
+                                        serviceId: serviceId,
+                                        serviceImage: serviceImage,
+                                        serviceName: serviceName,
+                                        servicePrice: servicePrice,
                                       ),
                                     ],
                                   ),

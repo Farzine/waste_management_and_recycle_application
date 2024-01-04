@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 import 'package:waste_management_and_recycle_application/screens/my_profile/my_profile.dart';
 import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
 import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 
-class DrawerSide extends StatelessWidget {
+class DrawerSide extends StatefulWidget {
+  UserProvider userProvider;
+  DrawerSide({required this.userProvider});
+  @override
+  State<DrawerSide> createState() => _DrawerSideState();
+}
+
+class _DrawerSideState extends State<DrawerSide> {
   Widget listTile(
       {required IconData icon,
       required String title,
@@ -26,61 +34,44 @@ class DrawerSide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userData = widget.userProvider.currentUserData;
     return Drawer(
       child: Container(
         color: Color.fromARGB(255, 165, 248, 165),
         child: ListView(
           children: [
             DrawerHeader(
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.white54,
-                    radius: 43,
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Color.fromARGB(255, 86, 161, 71),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(0),
-                        child: Image.asset('assets/Garbage.png'),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white54,
+                      radius: 43,
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Color.fromARGB(255, 86, 161, 71),
+                        backgroundImage: NetworkImage(userData.userImage ??
+                            'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                    width: 20,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Welcome User"),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Container(
-                        height: 30,
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: Colors.black),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 86, 161, 71),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              side: BorderSide(
-                                width: 2,
-                              ),
-                            ),
-                          ),
+                    SizedBox(
+                      height: 20,
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(userData.userName),
+                        Text(
+                          userData.userEmail,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             listTile(
@@ -100,7 +91,7 @@ class DrawerSide extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MyProfile(),
+                    builder: (context) => MyProfile(userData: userData),
                   ),
                 );
               },

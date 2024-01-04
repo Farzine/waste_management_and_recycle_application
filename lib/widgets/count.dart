@@ -55,8 +55,8 @@ class _CountState extends State<Count> {
     getAddAndQuantity();
     ReviewServiceProvider reviewServiceProvider = Provider.of(context);
     return Container(
-      height: 25,
-      width: 100,
+      height: 30,
+      width: 98,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
@@ -87,7 +87,7 @@ class _CountState extends State<Count> {
                         cartImage: widget.serviceImage,
                         cartName: widget.serviceName,
                         cartSubName: widget.serviceSubName,
-                        cartPrice: widget.servicePrice * count,
+                        cartPrice: widget.servicePrice ~/ (count ~/ 5),
                         cartQuantity: count,
                       );
                     }
@@ -99,7 +99,7 @@ class _CountState extends State<Count> {
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 Text(
                   '$count KG',
@@ -107,7 +107,7 @@ class _CountState extends State<Count> {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 InkWell(
                   onTap: () {
@@ -119,7 +119,7 @@ class _CountState extends State<Count> {
                       cartImage: widget.serviceImage,
                       cartName: widget.serviceName,
                       cartSubName: widget.serviceSubName,
-                      cartPrice: widget.servicePrice * count,
+                      cartPrice: widget.servicePrice * (count ~/ 5),
                       cartQuantity: count,
                     );
                   },
