@@ -25,7 +25,19 @@ class Count extends StatefulWidget {
 }
 
 class _CountState extends State<Count> {
-  int count = 0;
+  late int count;
+  getCount() {
+    setState(() {
+      count = widget.serviceQuantity;
+    });
+  }
+
+  @override
+  void initState() {
+    getCount();
+    super.initState();
+  }
+
   bool istrue = false;
   getAddAndQuantity() {
     FirebaseFirestore.instance

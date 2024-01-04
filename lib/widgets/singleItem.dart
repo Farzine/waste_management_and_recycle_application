@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/widgets/count.dart';
 
-class SingleItem extends StatelessWidget {
+class SingleItem extends StatefulWidget {
   bool isbool = false;
 
   final String serviceName;
@@ -24,7 +27,29 @@ class SingleItem extends StatelessWidget {
   });
 
   @override
+  State<SingleItem> createState() => _SingleItemState();
+}
+
+class _SingleItemState extends State<SingleItem> {
+  late ReviewServiceProvider reviewServiceProvider;
+  late int count;
+  getCount() {
+    setState(() {
+      count = widget.serviceQuantity;
+    });
+  }
+
+  @override
+  void initState() {
+    getCount();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    //getCount();
+    reviewServiceProvider = Provider.of(context);
+    reviewServiceProvider.getReviewCartData();
     return Column(
       children: [
         Padding(
@@ -35,7 +60,7 @@ class SingleItem extends StatelessWidget {
                 child: Container(
                   height: 100,
                   child: Center(
-                    child: Image.asset(serviceImage),
+                    child: Image.asset(widget.serviceImage),
                   ),
                 ),
               ),
@@ -43,7 +68,7 @@ class SingleItem extends StatelessWidget {
                 child: Container(
                   height: 90,
                   child: Column(
-                    mainAxisAlignment: isbool == false
+                    mainAxisAlignment: widget.isbool == false
                         ? MainAxisAlignment.spaceBetween
                         : MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,18 +78,18 @@ class SingleItem extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              serviceName,
+                              widget.serviceName,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              serviceSubName,
+                              widget.serviceSubName,
                             ),
                           ],
                         ),
                       ),
-                      isbool == false
+                      widget.isbool == false
                           ? InkWell(
                               onTap: () {
                                 showModalBottomSheet(
@@ -136,7 +161,8 @@ class SingleItem extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child: Text('$serviceQuantity' + ' KG'),
+                                      child: Text(
+                                          '${widget.serviceQuantity}' + ' KG'),
                                     ),
                                     Center(
                                       child: Icon(
@@ -151,11 +177,11 @@ class SingleItem extends StatelessWidget {
                             )
                           : Row(
                               children: [
-                                Text('\$ ' + '$servicePrice'),
+                                Text('\$ ' + '${widget.servicePrice}'),
                                 SizedBox(
                                   width: 20,
                                 ),
-                                Text('$serviceQuantity' + ' KG'),
+                                Text('${widget.serviceQuantity}' + ' KG'),
                               ],
                             ),
                     ],
@@ -165,10 +191,10 @@ class SingleItem extends StatelessWidget {
               Expanded(
                 child: Container(
                   height: 100,
-                  padding: isbool == false
+                  padding: widget.isbool == false
                       ? EdgeInsets.symmetric(horizontal: 15, vertical: 32)
                       : EdgeInsets.only(left: 15, right: 15),
-                  child: isbool == false
+                  child: widget.isbool == false
                       ? Container(
                           height: 20,
                           width: 35,
@@ -181,12 +207,59 @@ class SingleItem extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.add,
-                                  color: Colors.black,
-                                  size: 20,
+                                InkWell(
+                                  onTap: () {
+                                    if (count == 5) {
+                                      Fluttertoast.showToast(
+                                        msg: 'You reach minimum limit',
+                                        backgroundColor:
+                                            Color.fromARGB(255, 165, 248, 165),
+                                      );
+                                    } else {
+                                      setState(() {
+                                        count -= 5;
+                                      });
+                                      reviewServiceProvider
+                                          .updateReviewServiceData(
+                                        cartID: widget.serviceId,
+                                        cartImage: widget.serviceImage,
+                                        cartName: widget.serviceName,
+                                        cartPrice:
+                                            widget.servicePrice ~/ (count ~/ 5),
+                                        cartQuantity: count,
+                                      );
+                                    }
+                                  },
+                                  child: Icon(
+                                    Icons.remove,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
                                 ),
-                                Text('ADD'),
+                                Text(' $count KG'),
+                                InkWell(
+                                  onTap: () {
+                                    if (count >= 0) {
+                                      setState(() {
+                                        count += 5;
+                                      });
+                                      reviewServiceProvider
+                                          .updateReviewServiceData(
+                                        cartID: widget.serviceId,
+                                        cartImage: widget.serviceImage,
+                                        cartName: widget.serviceName,
+                                        cartPrice:
+                                            widget.servicePrice * (count ~/ 5),
+                                        cartQuantity: count,
+                                      );
+                                    }
+                                  },
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -197,7 +270,7 @@ class SingleItem extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  onDelete();
+                                  widget.onDelete();
                                 },
                                 child: Icon(
                                   Icons.delete,
@@ -221,12 +294,12 @@ class SingleItem extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Count(
-                                        serviceQuantity: serviceQuantity,
-                                        serviceSubName: serviceSubName,
-                                        serviceId: serviceId,
-                                        serviceImage: serviceImage,
-                                        serviceName: serviceName,
-                                        servicePrice: servicePrice,
+                                        serviceQuantity: widget.serviceQuantity,
+                                        serviceSubName: widget.serviceSubName,
+                                        serviceId: widget.serviceId,
+                                        serviceImage: widget.serviceImage,
+                                        serviceName: widget.serviceName,
+                                        servicePrice: widget.servicePrice,
                                       ),
                                     ],
                                   ),
@@ -240,7 +313,7 @@ class SingleItem extends StatelessWidget {
             ],
           ),
         ),
-        isbool == false
+        widget.isbool == false
             ? Container()
             : Divider(
                 height: 1,
