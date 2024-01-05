@@ -87,7 +87,7 @@ class _ServiceOverviewState extends State<ServiceOverview> {
                 ),
               );
             },
-            title: 'Proceed to continue',
+            title: 'Confirm order',
             iconData: Icons.arrow_circle_right_outlined,
           ),
           bottomNavigationBar(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/models/review_service_model.dart';
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
+import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/delivery_details.dart';
 import 'package:waste_management_and_recycle_application/widgets/singleItem.dart';
 
 class ReviewService extends StatelessWidget {
@@ -72,7 +74,19 @@ class ReviewService extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
-            onPressed: () {},
+            onPressed: () {
+              if (reviewServiceProvider.getReviewCartDataList.isEmpty) {
+                Fluttertoast.showToast(
+                  msg: 'No selected service found',
+                );
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => DeliveryDetails(),
+                  ),
+                );
+              }
+            },
           ),
         ),
       ),
@@ -110,11 +124,9 @@ class ReviewService extends StatelessWidget {
                       servicePrice: data.cartPrice,
                       serviceQuantity: data.cartQuantity,
                       isbool: true,
-
                       onDelete: () {
                         showAlertDialog(context, data);
                       },
-                      // serviceUnit: data.cartID,
                     ),
                   ],
                 );
