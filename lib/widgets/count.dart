@@ -25,7 +25,8 @@ class Count extends StatefulWidget {
 }
 
 class _CountState extends State<Count> {
-  int count = 0;
+  late int count = 1;
+
   bool istrue = false;
   getAddAndQuantity() {
     FirebaseFirestore.instance
@@ -55,8 +56,8 @@ class _CountState extends State<Count> {
     getAddAndQuantity();
     ReviewServiceProvider reviewServiceProvider = Provider.of(context);
     return Container(
-      height: 25,
-      width: 100,
+      height: 30,
+      width: 98,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
@@ -64,30 +65,28 @@ class _CountState extends State<Count> {
         borderRadius: BorderRadius.circular(8),
         color: Color.fromARGB(255, 86, 161, 71),
       ),
-      child: istrue == true || count != 0
+      child: istrue == true
           ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
                   onTap: () {
-                    if (count == 5) {
+                    if (count == 1) {
                       setState(() {
                         istrue = false;
                       });
                       reviewServiceProvider
                           .reviewCartDataDelete(widget.serviceId);
-                    }
-                    if (count > 0) {
+                    } else if (count > 1) {
                       setState(() {
-                        istrue = false;
-                        count -= 5;
+                        count--;
                       });
                       reviewServiceProvider.updateReviewServiceData(
                         cartID: widget.serviceId,
                         cartImage: widget.serviceImage,
                         cartName: widget.serviceName,
                         cartSubName: widget.serviceSubName,
-                        cartPrice: widget.servicePrice * count,
+                        cartPrice: widget.servicePrice,
                         cartQuantity: count,
                       );
                     }
@@ -99,7 +98,7 @@ class _CountState extends State<Count> {
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 Text(
                   '$count KG',
@@ -107,19 +106,19 @@ class _CountState extends State<Count> {
                       color: Colors.black, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
                 InkWell(
                   onTap: () {
                     setState(() {
-                      count += 5;
+                      count++;
                     });
                     reviewServiceProvider.updateReviewServiceData(
                       cartID: widget.serviceId,
                       cartImage: widget.serviceImage,
                       cartName: widget.serviceName,
                       cartSubName: widget.serviceSubName,
-                      cartPrice: widget.servicePrice * count,
+                      cartPrice: widget.servicePrice,
                       cartQuantity: count,
                     );
                   },
@@ -142,7 +141,7 @@ class _CountState extends State<Count> {
                     cartImage: widget.serviceImage,
                     cartName: widget.serviceName,
                     cartSubName: widget.serviceSubName,
-                    cartPrice: widget.servicePrice * count,
+                    cartPrice: widget.servicePrice,
                     cartQuantity: count,
                   );
                 },

@@ -5,6 +5,7 @@ class ReviewCartModel {
   String cartSubName;
   int cartPrice;
   int cartQuantity;
+
   ReviewCartModel({
     required this.cartSubName,
     required this.cartID,

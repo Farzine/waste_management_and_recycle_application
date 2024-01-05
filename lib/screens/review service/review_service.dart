@@ -56,7 +56,7 @@ class ReviewService extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          "\$ 100.00 ",
+          "\$ ${reviewServiceProvider.getTotalPrice()} ",
         ),
         trailing: Container(
           width: 160,
@@ -110,9 +110,11 @@ class ReviewService extends StatelessWidget {
                       servicePrice: data.cartPrice,
                       serviceQuantity: data.cartQuantity,
                       isbool: true,
+
                       onDelete: () {
                         showAlertDialog(context, data);
                       },
+                      // serviceUnit: data.cartID,
                     ),
                   ],
                 );
