@@ -25,18 +25,7 @@ class Count extends StatefulWidget {
 }
 
 class _CountState extends State<Count> {
-  late int count;
-  getCount() {
-    setState(() {
-      count = widget.serviceQuantity;
-    });
-  }
-
-  @override
-  void initState() {
-    getCount();
-    super.initState();
-  }
+  late int count = 1;
 
   bool istrue = false;
   getAddAndQuantity() {
@@ -76,30 +65,28 @@ class _CountState extends State<Count> {
         borderRadius: BorderRadius.circular(8),
         color: Color.fromARGB(255, 86, 161, 71),
       ),
-      child: istrue == true || count != 0
+      child: istrue == true
           ? Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
                   onTap: () {
-                    if (count == 5) {
+                    if (count == 1) {
                       setState(() {
                         istrue = false;
                       });
                       reviewServiceProvider
                           .reviewCartDataDelete(widget.serviceId);
-                    }
-                    if (count > 0) {
+                    } else if (count > 1) {
                       setState(() {
-                        istrue = false;
-                        count -= 5;
+                        count--;
                       });
                       reviewServiceProvider.updateReviewServiceData(
                         cartID: widget.serviceId,
                         cartImage: widget.serviceImage,
                         cartName: widget.serviceName,
                         cartSubName: widget.serviceSubName,
-                        cartPrice: widget.servicePrice ~/ (count ~/ 5),
+                        cartPrice: widget.servicePrice,
                         cartQuantity: count,
                       );
                     }
@@ -124,14 +111,14 @@ class _CountState extends State<Count> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      count += 5;
+                      count++;
                     });
                     reviewServiceProvider.updateReviewServiceData(
                       cartID: widget.serviceId,
                       cartImage: widget.serviceImage,
                       cartName: widget.serviceName,
                       cartSubName: widget.serviceSubName,
-                      cartPrice: widget.servicePrice * (count ~/ 5),
+                      cartPrice: widget.servicePrice,
                       cartQuantity: count,
                     );
                   },
@@ -154,7 +141,7 @@ class _CountState extends State<Count> {
                     cartImage: widget.serviceImage,
                     cartName: widget.serviceName,
                     cartSubName: widget.serviceSubName,
-                    cartPrice: widget.servicePrice * count,
+                    cartPrice: widget.servicePrice,
                     cartQuantity: count,
                   );
                 },

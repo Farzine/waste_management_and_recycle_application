@@ -83,6 +83,15 @@ class ReviewServiceProvider with ChangeNotifier {
     return reviewCartDataList;
   }
 
+//////////////////total price//////////////
+  getTotalPrice() {
+    double total = 0.0;
+    reviewCartDataList.forEach((element) {
+      total += element.cartPrice * element.cartQuantity;
+    });
+    return total;
+  }
+
   /////// ReviewCart Delete Function///////
   reviewCartDataDelete(cartID) {
     FirebaseFirestore.instance

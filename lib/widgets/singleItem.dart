@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/models/service_model.dart';
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/widgets/count.dart';
 
@@ -31,6 +32,7 @@ class SingleItem extends StatefulWidget {
 }
 
 class _SingleItemState extends State<SingleItem> {
+  var unitData;
   late ReviewServiceProvider reviewServiceProvider;
   late int count;
   getCount() {
@@ -106,7 +108,7 @@ class _SingleItemState extends State<SingleItem> {
                                             ),
                                             iconColor: Color.fromARGB(
                                                 255, 86, 161, 71),
-                                            title: new Text('5 KG'),
+                                            title: new Text('10\$ / 5 KG'),
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
@@ -117,7 +119,7 @@ class _SingleItemState extends State<SingleItem> {
                                             ),
                                             iconColor: Color.fromARGB(
                                                 255, 86, 161, 71),
-                                            title: new Text('10 KG'),
+                                            title: new Text('20\$ / 10 KG'),
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
@@ -128,7 +130,7 @@ class _SingleItemState extends State<SingleItem> {
                                             ),
                                             iconColor: Color.fromARGB(
                                                 255, 86, 161, 71),
-                                            title: new Text('20 KG'),
+                                            title: new Text('40\$ / 20 KG'),
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
@@ -139,7 +141,8 @@ class _SingleItemState extends State<SingleItem> {
                                             ),
                                             iconColor: Color.fromARGB(
                                                 255, 86, 161, 71),
-                                            title: new Text('> 20 KG'),
+                                            title:
+                                                new Text('100\$ / (> 20 KG)'),
                                             onTap: () {
                                               Navigator.pop(context);
                                             },
@@ -162,7 +165,8 @@ class _SingleItemState extends State<SingleItem> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                          '${widget.serviceQuantity}' + ' KG'),
+                                          '${widget.servicePrice * count}' +
+                                              ' \$'),
                                     ),
                                     Center(
                                       child: Icon(
@@ -177,7 +181,8 @@ class _SingleItemState extends State<SingleItem> {
                             )
                           : Row(
                               children: [
-                                Text('\$ ' + '${widget.servicePrice}'),
+                                Text('\$ ' +
+                                    '${widget.servicePrice * widget.serviceQuantity}'),
                                 SizedBox(
                                   width: 20,
                                 ),
@@ -209,7 +214,7 @@ class _SingleItemState extends State<SingleItem> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    if (count == 5) {
+                                    if (count == 1) {
                                       Fluttertoast.showToast(
                                         msg: 'You reach minimum limit',
                                         backgroundColor:
@@ -217,15 +222,14 @@ class _SingleItemState extends State<SingleItem> {
                                       );
                                     } else {
                                       setState(() {
-                                        count -= 5;
+                                        count--;
                                       });
                                       reviewServiceProvider
                                           .updateReviewServiceData(
                                         cartID: widget.serviceId,
                                         cartImage: widget.serviceImage,
                                         cartName: widget.serviceName,
-                                        cartPrice:
-                                            widget.servicePrice ~/ (count ~/ 5),
+                                        cartPrice: widget.servicePrice,
                                         cartQuantity: count,
                                       );
                                     }
@@ -241,15 +245,14 @@ class _SingleItemState extends State<SingleItem> {
                                   onTap: () {
                                     if (count >= 0) {
                                       setState(() {
-                                        count += 5;
+                                        count++;
                                       });
                                       reviewServiceProvider
                                           .updateReviewServiceData(
                                         cartID: widget.serviceId,
                                         cartImage: widget.serviceImage,
                                         cartName: widget.serviceName,
-                                        cartPrice:
-                                            widget.servicePrice * (count ~/ 5),
+                                        cartPrice: widget.servicePrice,
                                         cartQuantity: count,
                                       );
                                     }
