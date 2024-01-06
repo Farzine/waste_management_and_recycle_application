@@ -49,7 +49,6 @@ class _SingleItemState extends State<SingleItem> {
 
   @override
   Widget build(BuildContext context) {
-    //getCount();
     reviewServiceProvider = Provider.of(context);
     reviewServiceProvider.getReviewCartData();
     return Column(
@@ -286,11 +285,11 @@ class _SingleItemState extends State<SingleItem> {
                               ),
                               Container(
                                 height: 30,
-                                width: 200,
+                                width: 92,
                                 decoration: BoxDecoration(
                                   color: Color.fromARGB(255, 86, 161, 71),
                                   border: Border.all(color: Colors.white60),
-                                  borderRadius: BorderRadius.circular(30),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
                                   child: Row(

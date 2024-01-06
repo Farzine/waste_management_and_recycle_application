@@ -57,7 +57,7 @@ class _CountState extends State<Count> {
     ReviewServiceProvider reviewServiceProvider = Provider.of(context);
     return Container(
       height: 30,
-      width: 98,
+      width: 90,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.grey,
