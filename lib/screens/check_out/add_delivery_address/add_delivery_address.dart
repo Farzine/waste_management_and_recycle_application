@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/providers/checkout_provider.dart';
+import 'package:waste_management_and_recycle_application/screens/check_out/google_map/google_map.dart';
 import 'package:waste_management_and_recycle_application/widgets/custom_text.dart';
+
+import '../../../providers/checkout_provider.dart';
 
 class AddDeliveryAddress extends StatefulWidget {
   @override
   State<AddDeliveryAddress> createState() => _AddDeliveryAddressState();
 }
 
-enum AddressType {
+enum addressType {
   Home,
   Work,
 }
 
 class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
-  var myType = AddressType.Home;
+  var myType = addressType.Home;
   @override
   Widget build(BuildContext context) {
+    CheckOutProvider checkOutProvider = Provider.of(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 165, 248, 165),
       appBar: AppBar(
@@ -31,68 +37,74 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         height: 48,
-        child: MaterialButton(
-          onPressed: () {},
-          child: Text(
-            'Add Address',
-            style: TextStyle(color: Colors.black),
-          ),
-          color: Color.fromARGB(255, 86, 161, 71),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
+        child: checkOutProvider.isloading == false
+            ? MaterialButton(
+                onPressed: () {
+                  checkOutProvider.validator(context, myType);
+                },
+                child: Text(
+                  'Add Address',
+                  style: TextStyle(color: Colors.black),
+                ),
+                color: Color.fromARGB(255, 86, 161, 71),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: [
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.firstName,
                 keyboardType: TextInputType.name,
                 labText: 'Frist Name'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.lastName,
                 keyboardType: TextInputType.name,
                 labText: 'Last Name'),
             CustomTextField(
-                controller: TextEditingController(),
-                keyboardType: TextInputType.datetime,
-                labText: 'Date of birth'),
-            CustomTextField(
-                controller: TextEditingController(),
-                keyboardType: TextInputType.name,
-                labText: 'Gender'),
-            CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.mobileNo,
                 keyboardType: TextInputType.phone,
                 labText: 'Mobile No'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.alternateMobileNo,
+                keyboardType: TextInputType.phone,
+                labText: 'Alternate Mobile No'),
+            CustomTextField(
+                controller: checkOutProvider.email,
                 keyboardType: TextInputType.emailAddress,
                 labText: 'Email'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.division,
                 keyboardType: TextInputType.name,
                 labText: 'Division'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.district,
                 keyboardType: TextInputType.name,
                 labText: 'District'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.union,
                 keyboardType: TextInputType.name,
                 labText: 'Union'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.village,
                 keyboardType: TextInputType.name,
                 labText: 'Village'),
             CustomTextField(
-                controller: TextEditingController(),
+                controller: checkOutProvider.postCode,
                 keyboardType: TextInputType.number,
                 labText: 'Post code'),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CustomGoogleMap()),
+                );
+              },
               child: Container(
                 height: 47,
                 width: double.infinity,
@@ -100,7 +112,9 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Set current Loaction'),
+                    checkOutProvider.setLocation == null
+                        ? Text('Set current Loaction')
+                        : Text('Location setup completed'),
                   ],
                 ),
               ),
@@ -117,7 +131,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                   Icons.home,
                   color: Color.fromARGB(255, 86, 161, 71),
                 ),
-                value: AddressType.Home,
+                value: addressType.Home,
                 groupValue: myType,
                 onChanged: (value) {
                   setState(() {
@@ -130,7 +144,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                   Icons.work,
                   color: Color.fromARGB(255, 86, 161, 71),
                 ),
-                value: AddressType.Work,
+                value: addressType.Work,
                 groupValue: myType,
                 onChanged: (value) {
                   setState(() {

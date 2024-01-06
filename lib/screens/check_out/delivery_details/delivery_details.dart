@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/providers/checkout_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/add_delivery_address/add_delivery_address.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/single_delivery_Item.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/payment_summary/payment_summary.dart';
 
-class DeliveryDetails extends StatelessWidget {
+class DeliveryDetails extends StatefulWidget {
+  @override
+  State<DeliveryDetails> createState() => _DeliveryDetailsState();
+}
+
+class _DeliveryDetailsState extends State<DeliveryDetails> {
   List<Widget> address = [
     SingleDeliveryItem(
       address: 'area, Sylhet/SUST',
@@ -15,6 +22,8 @@ class DeliveryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CheckOutProvider deliveryAddressProvider = Provider.of(context);
+    deliveryAddressProvider.getDeliveryAddressData();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 165, 248, 165),
       appBar: AppBar(
@@ -45,7 +54,7 @@ class DeliveryDetails extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: MaterialButton(
           onPressed: () {
-            address.isEmpty
+            deliveryAddressProvider.getDeliveryAddressList.isEmpty
                 ? Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => AddDeliveryAddress(),
@@ -57,7 +66,7 @@ class DeliveryDetails extends StatelessWidget {
                     ),
                   );
           },
-          child: address.isEmpty
+          child: deliveryAddressProvider.getDeliveryAddressList.isEmpty
               ? Text("Add new Address")
               : Text('Payment summary'),
           color: Color.fromARGB(255, 86, 161, 71),
@@ -82,7 +91,7 @@ class DeliveryDetails extends StatelessWidget {
           ),
           Column(
             children: [
-              address.isEmpty
+              deliveryAddressProvider.getDeliveryAddressList.isEmpty
                   ? Container()
                   : SingleDeliveryItem(
                       address: 'area, Sylhet/SUST',
