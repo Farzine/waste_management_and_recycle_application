@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/models/delivery_address_model.dart';
 import 'package:waste_management_and_recycle_application/providers/checkout_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/add_delivery_address/add_delivery_address.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/single_delivery_Item.dart';
@@ -11,6 +12,7 @@ class DeliveryDetails extends StatefulWidget {
 }
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
+  late DeliveryAddressModel value;
   @override
   Widget build(BuildContext context) {
     CheckOutProvider deliveryAddressProvider = Provider.of(context);
@@ -52,7 +54,9 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                   )
                 : Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PaymentSummary(),
+                      builder: (context) => PaymentSummary(
+                        deliveryAddressList: value,
+                      ),
                     ),
                   );
           },
@@ -88,6 +92,9 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
               : Column(
                   children: deliveryAddressProvider.getDeliveryAddressList
                       .map<Widget>((e) {
+                    setState(() {
+                      value = e;
+                    });
                     return SingleDeliveryItem(
                       address:
                           "Division: ${e.division}, District: ${e.district}, Union: ${e.union}, Village: ${e.village},  Post Code: ${e.postCode}",
