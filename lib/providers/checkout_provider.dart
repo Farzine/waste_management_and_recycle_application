@@ -18,7 +18,7 @@ class CheckOutProvider with ChangeNotifier {
   TextEditingController union = TextEditingController();
   TextEditingController village = TextEditingController();
   TextEditingController postCode = TextEditingController();
-  late LocationData setLocation;
+  LocationData? setLocation;
   void validator(context, addressType myType) async {
     if (firstName.text.isEmpty) {
       Fluttertoast.showToast(msg: 'first name is empty');
@@ -60,8 +60,8 @@ class CheckOutProvider with ChangeNotifier {
         'village': village.text,
         'postCode': postCode.text,
         'addressType': myType.toString(),
-        'longitude': setLocation.longitude,
-        'latitude': setLocation.latitude,
+        'longitude': setLocation!.longitude,
+        'latitude': setLocation!.latitude,
       }).then((value) async {
         isloading = false;
         notifyListeners();
@@ -79,7 +79,7 @@ class CheckOutProvider with ChangeNotifier {
 
     DeliveryAddressModel deliveryAddressModel;
     DocumentSnapshot _db = await FirebaseFirestore.instance
-        .collection("AddDeliverAddress")
+        .collection("AddDeliveryAddress")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     if (_db.exists) {

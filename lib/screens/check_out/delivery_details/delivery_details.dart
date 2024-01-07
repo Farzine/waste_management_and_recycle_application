@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/models/delivery_address_model.dart';
 import 'package:waste_management_and_recycle_application/providers/checkout_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/add_delivery_address/add_delivery_address.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/single_delivery_Item.dart';
@@ -11,15 +12,7 @@ class DeliveryDetails extends StatefulWidget {
 }
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
-  List<Widget> address = [
-    SingleDeliveryItem(
-      address: 'area, Sylhet/SUST',
-      addressType: 'Home',
-      title: 'Fazine',
-      number: '01793834474',
-    ),
-  ];
-
+  late DeliveryAddressModel value;
   @override
   Widget build(BuildContext context) {
     CheckOutProvider deliveryAddressProvider = Provider.of(context);
@@ -49,7 +42,6 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: Container(
-        //width: 160,
         height: 48,
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: MaterialButton(
@@ -62,7 +54,9 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
                   )
                 : Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => PaymentSummary(),
+                      builder: (context) => PaymentSummary(
+                        deliveryAddressList: value,
+                      ),
                     ),
                   );
           },
@@ -89,18 +83,29 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
             height: 1,
             color: Colors.black45,
           ),
-          Column(
-            children: [
-              deliveryAddressProvider.getDeliveryAddressList.isEmpty
-                  ? Container()
-                  : SingleDeliveryItem(
-                      address: 'area, Sylhet/SUST',
-                      addressType: 'Home',
-                      title: 'Fazine',
-                      number: '01793834474',
-                    ),
-            ],
-          ),
+          deliveryAddressProvider.getDeliveryAddressList.isEmpty
+              ? Center(
+                  child: Container(
+                    child: Center(child: Text('N0 Data')),
+                  ),
+                )
+              : Column(
+                  children: deliveryAddressProvider.getDeliveryAddressList
+                      .map<Widget>((e) {
+                    setState(() {
+                      value = e;
+                    });
+                    return SingleDeliveryItem(
+                      address:
+                          "Division: ${e.division}, District: ${e.district}, Union: ${e.union}, Village: ${e.village},  Post Code: ${e.postCode}",
+                      title: "${e.firstName} ${e.lastName}",
+                      number: e.mobileNo,
+                      addressType: e.addressType == "addressTypes.Home"
+                          ? "Home"
+                          : "Work",
+                    );
+                  }).toList(),
+                ),
         ],
       ),
     );

@@ -17,14 +17,12 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   void _onMapCreated(GoogleMapController _value) {
     controller = _value;
     _location.onLocationChanged.listen((event) {
-      if (event.latitude != null && event.longitude != null) {
-        controller.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(event.latitude!, event.longitude!),
-            zoom: 15,
-          ),
-        ));
-      }
+      controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(event.latitude!, event.longitude!),
+          zoom: 15,
+        ),
+      ));
     });
   }
 
@@ -33,17 +31,6 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     CheckOutProvider checkOutProvider = Provider.of(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 165, 248, 165),
-      // appBar: AppBar(
-      //   backgroundColor: Color.fromARGB(255, 86, 161, 71),
-      //   title: Text(
-      //     'Set location',
-      //     style: TextStyle(
-      //         color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-      //   ),
-      //   iconTheme: IconThemeData(
-      //     color: Colors.black,
-      //   ),
-      // ),
       body: SafeArea(
         child: Container(
           height: MediaQuery.of(context).size.height,
