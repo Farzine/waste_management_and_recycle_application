@@ -11,15 +11,6 @@ class DeliveryDetails extends StatefulWidget {
 }
 
 class _DeliveryDetailsState extends State<DeliveryDetails> {
-  List<Widget> address = [
-    SingleDeliveryItem(
-      address: 'area, Sylhet/SUST',
-      addressType: 'Home',
-      title: 'Fazine',
-      number: '01793834474',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     CheckOutProvider deliveryAddressProvider = Provider.of(context);
@@ -49,7 +40,6 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: Container(
-        //width: 160,
         height: 48,
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: MaterialButton(
@@ -89,18 +79,26 @@ class _DeliveryDetailsState extends State<DeliveryDetails> {
             height: 1,
             color: Colors.black45,
           ),
-          Column(
-            children: [
-              deliveryAddressProvider.getDeliveryAddressList.isEmpty
-                  ? Container()
-                  : SingleDeliveryItem(
-                      address: 'area, Sylhet/SUST',
-                      addressType: 'Home',
-                      title: 'Fazine',
-                      number: '01793834474',
-                    ),
-            ],
-          ),
+          deliveryAddressProvider.getDeliveryAddressList.isEmpty
+              ? Center(
+                  child: Container(
+                    child: Center(child: Text('N0 Data')),
+                  ),
+                )
+              : Column(
+                  children: deliveryAddressProvider.getDeliveryAddressList
+                      .map<Widget>((e) {
+                    return SingleDeliveryItem(
+                      address:
+                          "Division: ${e.division}, District: ${e.district}, Union: ${e.union}, Village: ${e.village},  Post Code: ${e.postCode}",
+                      title: "${e.firstName} ${e.lastName}",
+                      number: e.mobileNo,
+                      addressType: e.addressType == "addressTypes.Home"
+                          ? "Home"
+                          : "Work",
+                    );
+                  }).toList(),
+                ),
         ],
       ),
     );
