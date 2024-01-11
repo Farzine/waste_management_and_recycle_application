@@ -139,7 +139,7 @@ class _AddDeliveryAddressState extends State<AddDeliveryAddress> {
                   });
                 }),
             RadioListTile(
-                title: Text('Work'),
+                title: Text('Office'),
                 secondary: Icon(
                   Icons.work,
                   color: Color.fromARGB(255, 86, 161, 71),

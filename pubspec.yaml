@@ -20,6 +20,7 @@ dependencies:
   fluttertoast: ^8.2.4
   location: ^5.0.3
   google_maps_flutter: ^2.5.1
+  pay: ^1.1.2
 
 dev_dependencies:
   flutter_test:

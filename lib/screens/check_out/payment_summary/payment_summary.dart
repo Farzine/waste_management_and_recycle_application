@@ -4,6 +4,8 @@ import 'package:waste_management_and_recycle_application/models/delivery_address
 import 'package:waste_management_and_recycle_application/providers/checkout_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
+import 'package:waste_management_and_recycle_application/screens/check_out/add_delivery_address/add_delivery_address.dart';
+import 'package:waste_management_and_recycle_application/screens/check_out/custom_google_pay.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/single_delivery_Item.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/payment_summary/order.dart';
 
@@ -64,7 +66,17 @@ class _PaymentSummaryState extends State<PaymentSummary> {
         trailing: Container(
           width: 160,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              myType == AddressType.OnlinePayment
+                  ? Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CustomGooglePay(
+                          total: total,
+                        ),
+                      ),
+                    )
+                  : Container();
+            },
             child: Text(
               'Place Order',
               style: TextStyle(color: Colors.black),
