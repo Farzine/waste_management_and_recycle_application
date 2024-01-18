@@ -28,7 +28,7 @@ class _CustomGooglePayState extends State<CustomGooglePay> {
         return AlertDialog(
           backgroundColor: Color.fromARGB(255, 165, 248, 165),
           title: Text('Order Confirmed'),
-          content: Text('Your order has been confirmed. Thank you!'),
+          content: Text('Payment completed. Thank you!'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 import 'package:waste_management_and_recycle_application/screens/my_profile/my_profile.dart';
+import 'package:waste_management_and_recycle_application/screens/notification/notification.dart';
 import 'package:waste_management_and_recycle_application/screens/review%20service/review_service.dart';
 import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 
@@ -99,7 +100,13 @@ class _DrawerSideState extends State<DrawerSide> {
             listTile(
               icon: Icons.notifications,
               title: 'Notification',
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NotificationPage(),
+                  ),
+                );
+              },
             ),
             listTile(
               icon: Icons.cleaning_services,
