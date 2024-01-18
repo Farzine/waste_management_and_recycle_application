@@ -1,58 +1,28 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/payment_summary/order.dart';
-import 'package:waste_management_and_recycle_application/screens/check_out/payment_summary/payment_config.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
-class CustomGooglePay extends StatefulWidget {
+class Cash_after_service extends StatefulWidget {
   final double total;
-  CustomGooglePay({required this.total});
+  Cash_after_service({required this.total});
 
   @override
-  State<CustomGooglePay> createState() => _CustomGooglePayState();
+  State<Cash_after_service> createState() => _Cash_after_serviceState();
 }
 
-class _CustomGooglePayState extends State<CustomGooglePay> {
-  void onGooglePayResult(paymentResult) {
-    debugPrint(paymentResult.toString());
-  }
-
-  void _showConfirmationDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Color.fromARGB(255, 165, 248, 165),
-          title: Text('Order Confirmed'),
-          content: Text('Your order has been confirmed. Thank you!'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
+class _Cash_after_serviceState extends State<Cash_after_service> {
   @override
   Widget build(BuildContext context) {
     ReviewServiceProvider reviewServiceProvider = Provider.of(context);
-
     reviewServiceProvider.getReviewCartData();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 165, 248, 165),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 86, 161, 71),
         title: Text(
-          'Pay with Google',
+          'Cash after service',
           style: TextStyle(
               color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
         ),
@@ -61,6 +31,7 @@ class _CustomGooglePayState extends State<CustomGooglePay> {
         ),
       ),
       body: Container(
+        alignment: Alignment.center,
         child: Column(
           children: [
             ExpansionTile(
@@ -85,34 +56,12 @@ class _CustomGooglePayState extends State<CustomGooglePay> {
                   SizedBox(
                     height: 10,
                   ),
-                  GooglePayButton(
-                    onPressed: () {
-                      _showConfirmationDialog(context);
-                    },
-
-                    //paymentConfigurationAsset: 'sample_payment_configuration.json',
-                    paymentConfiguration:
-                        PaymentConfiguration.fromJsonString(defaultGooglePay),
-                    paymentItems: [
-                      PaymentItem(
-                        label: 'Total Amount',
-                        amount: '\$ ${widget.total}',
-                        status: PaymentItemStatus.final_price,
-                      )
-                    ],
-                    width: double.infinity,
-
-                    type: GooglePayButtonType.pay,
-                    margin: const EdgeInsets.only(top: 15.0),
-                    onPaymentResult: (result) {
-                      log(result.toString());
-                    },
-
-                    loadingIndicator: const Center(
-                      child: CircularProgressIndicator(
+                  Text(
+                    "Your ordered service has been placed successfully",
+                    style: TextStyle(
                         color: Colors.black,
-                      ),
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                 ],
               ),
