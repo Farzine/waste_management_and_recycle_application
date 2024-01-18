@@ -6,8 +6,14 @@ import 'package:waste_management_and_recycle_application/providers/review_servic
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/delivery_details.dart';
 import 'package:waste_management_and_recycle_application/widgets/singleItem.dart';
 
-class ReviewService extends StatelessWidget {
+class ReviewService extends StatefulWidget {
+  @override
+  State<ReviewService> createState() => _ReviewServiceState();
+}
+
+class _ReviewServiceState extends State<ReviewService> {
   late ReviewServiceProvider reviewServiceProvider;
+
   showAlertDialog(BuildContext context, ReviewCartModel delete) {
     Widget cancelButton = TextButton(
       child: Text(

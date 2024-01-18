@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:waste_management_and_recycle_application/auth/sign_in.dart';
 import 'package:waste_management_and_recycle_application/models/user_model.dart';
-import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
+
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/delivery_details.dart';
-import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
+
 import 'package:waste_management_and_recycle_application/screens/my_profile/privacy_policy.dart';
 import 'package:waste_management_and_recycle_application/screens/my_profile/terms_and_condition.dart';
 import 'package:waste_management_and_recycle_application/screens/notification/notification.dart';
