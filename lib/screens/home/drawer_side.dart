@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
+import 'package:waste_management_and_recycle_application/screens/home/FAQs.dart';
+import 'package:waste_management_and_recycle_application/screens/home/service_hub_points.dart';
+import 'package:waste_management_and_recycle_application/screens/home/subscription.dart';
 import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 import 'package:waste_management_and_recycle_application/screens/my_profile/my_profile.dart';
 import 'package:waste_management_and_recycle_application/screens/notification/notification.dart';
@@ -130,13 +133,25 @@ class _DrawerSideState extends State<DrawerSide> {
             ),
             listTile(
               icon: Icons.location_on,
-              title: 'Pickup Points',
-              onTap: () {},
+              title: 'Service Hub Points',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ServiceHubPointScreen(),
+                  ),
+                );
+              },
             ),
             listTile(
               icon: Icons.subscriptions,
               title: 'Subscription',
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SubscriptionScreen(),
+                  ),
+                );
+              },
             ),
             listTile(
               icon: Icons.shop_2,
@@ -149,7 +164,13 @@ class _DrawerSideState extends State<DrawerSide> {
                 );
               },
             ),
-            listTile(icon: Icons.message_rounded, title: 'FAQs', onTap: () {}),
+            listTile(
+                icon: Icons.message_rounded,
+                title: 'FAQs',
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => FAQsScreen()));
+                }),
             Container(
               height: 350,
               padding: EdgeInsets.symmetric(horizontal: 20),

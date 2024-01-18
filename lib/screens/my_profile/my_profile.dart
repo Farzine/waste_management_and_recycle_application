@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:waste_management_and_recycle_application/auth/sign_in.dart';
 import 'package:waste_management_and_recycle_application/models/user_model.dart';
 import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
+import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/delivery_details.dart';
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
+import 'package:waste_management_and_recycle_application/screens/my_profile/privacy_policy.dart';
+import 'package:waste_management_and_recycle_application/screens/my_profile/terms_and_condition.dart';
+import 'package:waste_management_and_recycle_application/screens/notification/notification.dart';
 
 class MyProfile extends StatefulWidget {
   UserModel userData;
@@ -14,16 +19,23 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   @override
-  Widget listTile({required IconData icon, required String title}) {
+  Widget listTile(
+      {required IconData icon,
+      required String title,
+      required Function() onTap}) {
     return Column(
       children: [
         Divider(
           height: 1,
+          color: Colors.black,
         ),
         ListTile(
           leading: Icon(icon),
           title: Text(title),
           trailing: Icon(Icons.arrow_forward_ios),
+          onTap: () {
+            onTap();
+          },
         ),
       ],
     );
@@ -44,7 +56,6 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
       ),
-      //drawer: DrawerSide(userProvider: userProvider),
       body: Stack(
         children: [
           Column(
@@ -114,14 +125,61 @@ class _MyProfileState extends State<MyProfile> {
                     ),
                     listTile(
                         icon: Icons.cleaning_services,
-                        title: 'My odered Service'),
-                    listTile(icon: Icons.location_on, title: 'My Address'),
-                    listTile(icon: Icons.person, title: 'Contact Info'),
+                        title: 'My odered Service',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NotificationPage()));
+                        }),
                     listTile(
-                        icon: Icons.file_copy, title: 'Terms & Conditions'),
-                    listTile(icon: Icons.policy, title: 'Privacy Policy'),
-                    listTile(icon: Icons.add_chart, title: 'About'),
-                    listTile(icon: Icons.exit_to_app, title: 'Log Out'),
+                        icon: Icons.location_on,
+                        title: 'My Address',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DeliveryDetails()));
+                        }),
+                    listTile(
+                        icon: Icons.person,
+                        title: 'Contact Info',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DeliveryDetails()));
+                        }),
+                    listTile(
+                        icon: Icons.file_copy,
+                        title: 'Terms & Conditions',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      TermsAndConditionsScreen()));
+                        }),
+                    listTile(
+                        icon: Icons.policy,
+                        title: 'Privacy Policy',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PrivacyPolicyScreen()));
+                        }),
+                    listTile(
+                        icon: Icons.add_chart, title: 'About', onTap: () {}),
+                    listTile(
+                        icon: Icons.exit_to_app,
+                        title: 'Log Out',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignIn()));
+                        }),
                   ],
                 ),
               ),
