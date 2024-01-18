@@ -7,6 +7,7 @@ import 'package:waste_management_and_recycle_application/providers/wasteType_pro
 import 'package:waste_management_and_recycle_application/screens/home/drawer_side.dart';
 import 'package:waste_management_and_recycle_application/screens/home/singal_product.dart';
 import 'package:waste_management_and_recycle_application/screens/home/waste_type.dart';
+import 'package:waste_management_and_recycle_application/screens/notification/notification.dart';
 import 'package:waste_management_and_recycle_application/screens/search/search.dart';
 import 'package:waste_management_and_recycle_application/screens/service_overview/service_overview.dart';
 import 'package:waste_management_and_recycle_application/screens/wasteType_overview/wasteType_OverView.dart';
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => Search(search: []),
+                      builder: (context) => NotificationPage(),
                     ),
                   );
                 },
