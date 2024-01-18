@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/models/delivery_address_model.dart';
-import 'package:waste_management_and_recycle_application/providers/checkout_provider.dart';
+
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
-import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
-import 'package:waste_management_and_recycle_application/screens/check_out/add_delivery_address/add_delivery_address.dart';
+
 import 'package:waste_management_and_recycle_application/screens/check_out/custom_google_pay.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/delivery_details/single_delivery_Item.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/payment_summary/cash_after_pay.dart';

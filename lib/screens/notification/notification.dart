@@ -1,8 +1,7 @@
-import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:provider/provider.dart';
-import 'package:waste_management_and_recycle_application/models/review_service_model.dart';
+
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/screens/check_out/payment_summary/order.dart';
 

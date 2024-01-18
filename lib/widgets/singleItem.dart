@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:waste_management_and_recycle_application/models/service_model.dart';
+
 import 'package:waste_management_and_recycle_application/providers/review_service_provider.dart';
 import 'package:waste_management_and_recycle_application/widgets/count.dart';
 

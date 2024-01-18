@@ -4,8 +4,6 @@ import 'package:waste_management_and_recycle_application/providers/checkout_prov
 import 'package:waste_management_and_recycle_application/screens/check_out/google_map/google_map.dart';
 import 'package:waste_management_and_recycle_application/widgets/custom_text.dart';
 
-import '../../../providers/checkout_provider.dart';
-
 class AddDeliveryAddress extends StatefulWidget {
   @override
   State<AddDeliveryAddress> createState() => _AddDeliveryAddressState();

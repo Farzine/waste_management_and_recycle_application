@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
-import 'package:waste_management_and_recycle_application/models/service_model.dart';
+
 import 'package:waste_management_and_recycle_application/models/waste_type_model.dart';
 
 class WasteTypeProvider with ChangeNotifier {

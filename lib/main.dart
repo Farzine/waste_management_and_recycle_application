@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/auth/sign_in.dart';
@@ -9,7 +9,6 @@ import 'package:waste_management_and_recycle_application/providers/review_servic
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/wasteType_provider.dart';
-import 'package:waste_management_and_recycle_application/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_list.dart';
+
 import 'package:provider/provider.dart';
 import 'package:waste_management_and_recycle_application/providers/service_provider.dart';
 import 'package:waste_management_and_recycle_application/providers/user_provider.dart';
@@ -102,105 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   fit: BoxFit.cover,
                   image: AssetImage('assets/Dustbin_set.png'),
                 ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      //color: Colors.red,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 50),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor:
-                                  Color.fromARGB(255, 165, 248, 165),
-                              child: Icon(
-                                Icons.subscriptions,
-                                size: 30,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 20,
-                            width: 112,
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 86, 161, 71),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Subscription',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      //color: Colors.yellow,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 50),
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor:
-                                  Color.fromARGB(255, 165, 248, 165),
-                              child: Icon(
-                                Icons.garage,
-                                size: 35,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 20,
-                            width: 125,
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 86, 161, 71),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                  )),
-                              onPressed: () {},
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Special Pickup',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ),
             Padding(
