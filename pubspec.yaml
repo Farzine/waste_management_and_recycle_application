@@ -21,8 +21,7 @@ dependencies:
   location: ^5.0.3
   google_maps_flutter: ^2.5.1
   pay: ^1.1.2
-  flutter_local_notifications: ^10.0.0
-  background_fetch: ^1.2.2
+  
 
 dev_dependencies:
   flutter_test:
